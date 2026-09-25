@@ -1,0 +1,1160 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
+  <meta
+    name="description"
+    content="CAT TIMES｜海南中学校园匿名交流墙"
+  >
+
+  <meta name="theme-color" content="#111">
+
+  <title>CAT TIMES｜海南中学校园报</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: #f4f0e7;
+      color: #111;
+      font-family:
+        Georgia,
+        "Times New Roman",
+        "Noto Serif SC",
+        "Songti SC",
+        serif;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 28px));
+      margin: 0 auto;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    header {
+      padding-top: 22px;
+    }
+
+    .topline {
+      border-top: 5px solid #111;
+      border-bottom: 1px solid #111;
+      padding: 7px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      letter-spacing: .08em;
+    }
+
+    .masthead {
+      padding: 18px 0 10px;
+      border-bottom: 4px double #111;
+      text-align: center;
+    }
+
+    .masthead h1 {
+      margin: 0;
+      font-size: clamp(42px, 8vw, 88px);
+      line-height: .9;
+      letter-spacing: -.055em;
+      font-weight: 900;
+    }
+
+    .masthead .subtitle {
+      margin-top: 13px;
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      letter-spacing: .3em;
+    }
+
+    .notice {
+      margin: 10px 0 0;
+      border-bottom: 1px solid #111;
+      padding-bottom: 10px;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    /* =========================
+       DATABASE STATUS
+    ========================= */
+
+    .statusbar {
+      margin-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+    }
+
+    .db-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border: 1px solid #111;
+      padding: 5px 9px;
+      background: #fff;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #777;
+      display: inline-block;
+    }
+
+    .db-status.online .status-dot {
+      background: #111;
+    }
+
+    .db-status.local .status-dot {
+      background: #777;
+    }
+
+    .db-status.error .status-dot {
+      background: #111;
+      box-shadow: 0 0 0 2px #aaa;
+    }
+
+    /* =========================
+       TOOLBAR
+    ========================= */
+
+    .toolbar {
+      margin-top: 15px;
+      border-top: 1px solid #111;
+      border-bottom: 1px solid #111;
+      padding: 10px 0;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+    }
+
+    .search {
+      width: 100%;
+      border: 1px solid #111;
+      background: #fff;
+      padding: 11px 12px;
+      outline: none;
+    }
+
+    .search:focus {
+      box-shadow: 3px 3px 0 #111;
+    }
+
+    .publish-button {
+      border: 2px solid #111;
+      background: #111;
+      color: #fff;
+      padding: 10px 18px;
+      font-weight: 800;
+    }
+
+    .publish-button:hover {
+      background: #333;
+    }
+
+    /* =========================
+       CATEGORY
+    ========================= */
+
+    .categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 12px 0;
+    }
+
+    .category-button {
+      border: 1px solid #111;
+      background: transparent;
+      padding: 6px 10px;
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+    }
+
+    .category-button.active {
+      background: #111;
+      color: #fff;
+    }
+
+    /* =========================
+       SORT
+    ========================= */
+
+    .section-head {
+      margin-top: 20px;
+      border-top: 4px double #111;
+      border-bottom: 1px solid #111;
+      padding: 8px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 21px;
+    }
+
+    .sort-buttons {
+      display: flex;
+      gap: 4px;
+    }
+
+    .sort-button {
+      border: 1px solid #111;
+      background: #fff;
+      padding: 5px 8px;
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+    }
+
+    .sort-button.active {
+      background: #111;
+      color: #fff;
+    }
+
+    /* =========================
+       POSTS
+    ========================= */
+
+    .posts {
+      column-count: 2;
+      column-gap: 22px;
+      margin-top: 15px;
+    }
+
+    .post {
+      break-inside: avoid;
+      margin: 0 0 22px;
+      border-top: 3px solid #111;
+      border-bottom: 1px solid #111;
+      padding: 13px 0 12px;
+    }
+
+    .post-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .category-label {
+      font-weight: 800;
+    }
+
+    .local-label {
+      border: 1px solid #777;
+      padding: 1px 4px;
+      color: #555;
+    }
+
+    .post-title {
+      margin: 0 0 8px;
+      font-size: 25px;
+      line-height: 1.15;
+      font-weight: 900;
+    }
+
+    .post-content {
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-size: 15px;
+      line-height: 1.85;
+    }
+
+    .post-footer {
+      margin-top: 13px;
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      font-family: Arial, sans-serif;
+    }
+
+    .post-action {
+      border: 1px solid #111;
+      background: #fff;
+      padding: 5px 9px;
+      font-size: 11px;
+    }
+
+    .post-action:hover {
+      background: #eee;
+    }
+
+    .post-action.liked {
+      background: #111;
+      color: #fff;
+    }
+
+    .empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 10px;
+      font-size: 18px;
+      border-bottom: 1px solid #111;
+    }
+
+    /* =========================
+       LOADING
+    ========================= */
+
+    .loading {
+      text-align: center;
+      padding: 50px 10px;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+    }
+
+    .loading::after {
+      content: " …";
+      animation: dots 1s infinite;
+    }
+
+    @keyframes dots {
+      0% { content: " ."; }
+      33% { content: " .."; }
+      66% { content: " ..."; }
+      100% { content: " ."; }
+    }
+
+    /* =========================
+       MODAL
+    ========================= */
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+      z-index: 1000;
+    }
+
+    .modal-backdrop.show {
+      display: flex;
+    }
+
+    .modal {
+      width: min(680px, 100%);
+      max-height: 90vh;
+      overflow-y: auto;
+      background: #f4f0e7;
+      border: 3px solid #111;
+      box-shadow: 8px 8px 0 #111;
+      padding: 18px;
+    }
+
+    .modal-header {
+      border-bottom: 3px double #111;
+      padding-bottom: 10px;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .modal-header h3 {
+      margin: 0;
+      font-size: 25px;
+    }
+
+    .close {
+      border: 1px solid #111;
+      background: transparent;
+      width: 32px;
+      height: 32px;
+      font-size: 20px;
+    }
+
+    .field {
+      margin-bottom: 13px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 5px;
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .field input,
+    .field textarea,
+    .field select {
+      width: 100%;
+      border: 1px solid #111;
+      background: #fff;
+      padding: 10px;
+      outline: none;
+    }
+
+    .field textarea {
+      min-height: 150px;
+      resize: vertical;
+      line-height: 1.7;
+    }
+
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus {
+      box-shadow: 3px 3px 0 #111;
+    }
+
+    .form-note {
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      line-height: 1.7;
+      color: #555;
+    }
+
+    .modal-submit {
+      width: 100%;
+      border: 2px solid #111;
+      background: #111;
+      color: #fff;
+      padding: 12px;
+      font-weight: 800;
+    }
+
+    .modal-submit:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    /* =========================
+       COMMENTS
+    ========================= */
+
+    .comments {
+      margin-top: 16px;
+      border-top: 1px solid #111;
+      padding-top: 10px;
+      display: none;
+    }
+
+    .comments.show {
+      display: block;
+    }
+
+    .comment {
+      border-bottom: 1px dotted #555;
+      padding: 8px 0;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .comment-meta {
+      font-family: Arial, sans-serif;
+      font-size: 10px;
+      color: #555;
+      margin-bottom: 3px;
+    }
+
+    .comment-form {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 6px;
+    }
+
+    .comment-form input {
+      border: 1px solid #111;
+      padding: 7px;
+      min-width: 0;
+    }
+
+    .comment-form button {
+      border: 1px solid #111;
+      background: #111;
+      color: #fff;
+      padding: 7px 10px;
+    }
+
+    /* =========================
+       TOAST
+    ========================= */
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 25px;
+      transform: translate(-50%, 120px);
+      opacity: 0;
+      transition: .25s ease;
+      background: #111;
+      color: #fff;
+      border: 1px solid #fff;
+      padding: 10px 15px;
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      z-index: 2000;
+      max-width: calc(100% - 30px);
+      text-align: center;
+    }
+
+    .toast.show {
+      transform: translate(-50%, 0);
+      opacity: 1;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      margin-top: 35px;
+      border-top: 4px double #111;
+      padding: 18px 0 35px;
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      line-height: 1.8;
+      color: #444;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 760px) {
+      .page {
+        width: min(100% - 18px, 1180px);
+      }
+
+      .toolbar {
+        grid-template-columns: 1fr;
+      }
+
+      .posts {
+        column-count: 1;
+      }
+
+      .section-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .masthead h1 {
+        font-size: 52px;
+      }
+
+      .topline {
+        font-size: 10px;
+      }
+
+      .post-title {
+        font-size: 22px;
+      }
+
+      .post-content {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <header>
+
+    <div class="topline">
+      <span>海南中学 · CAMPUS EDITION</span>
+      <span id="dateText">CAT TIMES</span>
+    </div>
+
+    <div class="masthead">
+      <h1>CAT TIMES</h1>
+      <div class="subtitle">
+        海南中学校园匿名交流墙
+      </div>
+    </div>
+
+    <p class="notice">
+      这里可以匿名分享校园生活、学习压力、食堂住宿、老师教学、
+      社团活动以及你想说的任何校园话题。
+      请尊重他人，不发布个人隐私、联系方式、恶意造谣或违法内容。
+    </p>
+
+    <div class="statusbar">
+
+      <div
+        id="dbStatus"
+        class="db-status"
+        aria-live="polite"
+      >
+        <span class="status-dot"></span>
+        <span id="dbStatusText">正在连接数据库…</span>
+      </div>
+
+      <div>
+        访客编号：
+        <strong id="visitorShort">------</strong>
+      </div>
+
+    </div>
+
+  </header>
+
+  <main>
+
+    <div class="toolbar">
+
+      <input
+        id="searchInput"
+        class="search"
+        type="search"
+        placeholder="搜索标题、正文、分类……"
+        autocomplete="off"
+      >
+
+      <button
+        id="publishButton"
+        class="publish-button"
+        type="button"
+      >
+        ＋ 发布投稿
+      </button>
+
+    </div>
+
+    <div
+      id="categories"
+      class="categories"
+    ></div>
+
+    <div class="section-head">
+
+      <h2>
+        CAMPUS WALL
+        <span id="postCount">0</span>
+      </h2>
+
+      <div class="sort-buttons">
+
+        <button
+          class="sort-button active"
+          data-sort="latest"
+          type="button"
+        >
+          最新
+        </button>
+
+        <button
+          class="sort-button"
+          data-sort="hot"
+          type="button"
+        >
+          热门
+        </button>
+
+      </div>
+
+    </div>
+
+    <section
+      id="posts"
+      class="posts"
+      aria-live="polite"
+    >
+      <div class="loading">
+        正在读取校园墙
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+
+    <strong>CAT TIMES</strong><br>
+
+    本网站为校园匿名交流项目。
+    投稿内容由访客自行提交，不代表网站立场。
+    请勿发布他人的身份证号、电话号码、住址、账号密码、
+    私密照片或其他能够直接识别个人身份的信息。
+
+    <br><br>
+
+    数据模式：
+    <span id="footerMode">初始化中</span>
+
+  </footer>
+
+</div>
+
+
+<!-- =========================
+     PUBLISH MODAL
+========================= -->
+
+<div
+  id="publishModal"
+  class="modal-backdrop"
+  role="dialog"
+  aria-modal="true"
+>
+
+  <div class="modal">
+
+    <div class="modal-header">
+
+      <h3>发布匿名投稿</h3>
+
+      <button
+        id="closePublish"
+        class="close"
+        type="button"
+        aria-label="关闭"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <form id="publishForm">
+
+      <div class="field">
+
+        <label for="nickname">
+          昵称（可留空）
+        </label>
+
+        <input
+          id="nickname"
+          maxlength="30"
+          placeholder="匿名用户"
+        >
+
+      </div>
+
+      <div class="field">
+
+        <label for="title">
+          标题
+        </label>
+
+        <input
+          id="title"
+          maxlength="100"
+          required
+          placeholder="请输入投稿标题"
+        >
+
+      </div>
+
+      <div class="field">
+
+        <label for="category">
+          分类
+        </label>
+
+        <select id="category"></select>
+
+      </div>
+
+      <div class="field">
+
+        <label for="content">
+          内容
+        </label>
+
+        <textarea
+          id="content"
+          maxlength="5000"
+          required
+          placeholder="写下你想说的话……"
+        ></textarea>
+
+      </div>
+
+      <div class="form-note">
+        投稿完全匿名展示。系统不会在页面上展示你的访客 UUID。
+        为防止刷屏，同一设备两次投稿之间有冷却时间。
+      </div>
+
+      <br>
+
+      <button
+        id="submitPost"
+        class="modal-submit"
+        type="submit"
+      >
+        发布投稿
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     REPORT MODAL
+========================= -->
+
+<div
+  id="reportModal"
+  class="modal-backdrop"
+  role="dialog"
+  aria-modal="true"
+>
+
+  <div class="modal">
+
+    <div class="modal-header">
+
+      <h3>举报投稿</h3>
+
+      <button
+        id="closeReport"
+        class="close"
+        type="button"
+        aria-label="关闭"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <form id="reportForm">
+
+      <input
+        id="reportPostId"
+        type="hidden"
+      >
+
+      <div class="field">
+
+        <label for="reportReason">
+          举报原因
+        </label>
+
+        <select id="reportReason">
+
+          <option value="spam">
+            垃圾内容 / 刷屏
+          </option>
+
+          <option value="privacy">
+            泄露个人隐私
+          </option>
+
+          <option value="harassment">
+            人身攻击 / 骚扰
+          </option>
+
+          <option value="false_information">
+            虚假或明显误导信息
+          </option>
+
+          <option value="other">
+            其他
+          </option>
+
+        </select>
+
+      </div>
+
+      <button
+        class="modal-submit"
+        type="submit"
+      >
+        提交举报
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<div
+  id="toast"
+  class="toast"
+  role="status"
+  aria-live="polite"
+></div>
+
+
+<script>
+/* =========================================================
+   CAT TIMES
+   Production Frontend
+   ========================================================= */
+
+"use strict";
+
+
+/* =========================================================
+   SUPABASE CONFIG
+   ========================================================= */
+
+const SUPABASE_URL =
+  "https://txaovuikygbeegaancxt.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable__pHD0KU1vXv1Daw5X3rOcg_5V2Ot3-y";
+
+
+const SUPABASE_CDN_LIST = [
+  "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js",
+  "https://unpkg.com/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"
+];
+
+
+/* =========================================================
+   GLOBAL STATE
+   ========================================================= */
+
+let supabaseClient = null;
+
+let dbMode = "loading";
+
+let allPosts = [];
+
+let currentCategory = "全部";
+
+let currentSort = "latest";
+
+let searchKeyword = "";
+
+let currentCommentPost = null;
+
+let visitorId = getVisitorId();
+
+
+const CATEGORIES = [
+  "全部",
+  "校园生活",
+  "学习压力",
+  "食堂住宿",
+  "老师教学",
+  "社团活动",
+  "校园设施",
+  "其他"
+];
+
+
+/* =========================================================
+   DOM
+   ========================================================= */
+
+const postsEl =
+  document.getElementById("posts");
+
+const categoriesEl =
+  document.getElementById("categories");
+
+const postCountEl =
+  document.getElementById("postCount");
+
+const searchInput =
+  document.getElementById("searchInput");
+
+const publishModal =
+  document.getElementById("publishModal");
+
+const reportModal =
+  document.getElementById("reportModal");
+
+const publishForm =
+  document.getElementById("publishForm");
+
+const reportForm =
+  document.getElementById("reportForm");
+
+const publishButton =
+  document.getElementById("publishButton");
+
+const closePublish =
+  document.getElementById("closePublish");
+
+const closeReport =
+  document.getElementById("closeReport");
+
+const toastEl =
+  document.getElementById("toast");
+
+const dbStatus =
+  document.getElementById("dbStatus");
+
+const dbStatusText =
+  document.getElementById("dbStatusText");
+
+const footerMode =
+  document.getElementById("footerMode");
+
+const visitorShort =
+  document.getElementById("visitorShort");
+
+const dateText =
+  document.getElementById("dateText");
+
+
+/* =========================================================
+   INITIALIZATION
+   ========================================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  initialize
+);
+
+
+async function initialize() {
+
+  visitorShort.textContent =
+    visitorId.slice(0, 8);
+
+  dateText.textContent =
+    formatDate(new Date());
+
+  renderCategories();
+
+  bindEvents();
+
+  renderLocalImmediately();
+
+  await initializeSupabase();
+
+}
+
+
+/* =========================================================
+   EVENTS
+   ========================================================= */
+
+function bindEvents() {
+
+  publishButton.addEventListener(
+    "click",
+    () => openModal(publishModal)
+  );
+
+  closePublish.addEventListener(
+    "click",
+    () => closeModal(publishModal)
+  );
+
+  closeReport.addEventListener(
+    "click",
+    () => closeModal(reportModal)
+  );
+
+
+  [publishModal, reportModal].forEach(
+    modal => {
+
+      modal.addEventListener(
+        "click",
+        event => {
+
+          if (
+            event.target === modal
+          ) {
+            closeModal(modal);
+          }
+
+        }
+      );
+
+    }
+  );
+
+
+  searchInput.addEventListener(
+    "input",
+    event => {
+
+      searchKeyword =
+        event.target.value.trim().toLowerCase();
+
+      renderPosts();
+
+    }
+  );
+
+
+  publishForm.addEventListener(
+    "submit",
+    handlePublish
+  );
+
+
+  reportForm.addEventListener(
+    "submit",
+    handleReport
+  );
+
+
+  document
+    .querySelectorAll(".sort-button")
+    .forEach(button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          document
+            .querySelectorAll(".sort-button")
+            .forEach(
+              item => item.classList.remove("active")
+            );
+
+          button.classList.add("active");
+
+          currentSort =
+            button.dataset.sort;
+
+          renderPosts();
+
+        }
+      )

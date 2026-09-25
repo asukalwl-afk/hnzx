@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4"></script>
 
   <style>
     :root{
@@ -51,7 +51,11 @@
           transparent 50%
         );
 
-      background-size:23px 19px,31px 27px,5px 5px;
+      background-size:
+        23px 19px,
+        31px 27px,
+        5px 5px;
+
       background-color:var(--paper);
 
       font-family:
@@ -74,13 +78,19 @@
       color:#000;
       opacity:.065;
 
-      font-family:system-ui,sans-serif;
+      font-family:
+        system-ui,
+        sans-serif;
+
       font-size:42px;
       line-height:2.8;
       letter-spacing:12vw;
       word-spacing:7vw;
 
-      transform:rotate(-7deg) scale(1.08);
+      transform:
+        rotate(-7deg)
+        scale(1.08);
+
       overflow:hidden;
     }
 
@@ -104,6 +114,10 @@
       margin:0 auto;
     }
 
+    /* =========================
+       报纸头部
+    ========================= */
+
     .masthead{
       padding:18px 0 8px;
       text-align:center;
@@ -116,7 +130,6 @@
       gap:12px;
 
       border-bottom:1px solid var(--line);
-
       padding:5px 0;
 
       font-size:12px;
@@ -126,8 +139,12 @@
     .brand{
       margin:7px 0 0;
 
-      font-family:"UnifrakturCook",serif;
-      font-size:clamp(58px,10vw,106px);
+      font-family:
+        "UnifrakturCook",
+        serif;
+
+      font-size:
+        clamp(58px,10vw,106px);
 
       line-height:.9;
       font-weight:700;
@@ -148,6 +165,7 @@
       padding:7px 0;
 
       font-size:12px;
+
       overflow:hidden;
       white-space:nowrap;
     }
@@ -156,6 +174,10 @@
       display:inline-block;
       margin-right:28px;
     }
+
+    /* =========================
+       首页版面
+    ========================= */
 
     .layout{
       display:grid;
@@ -178,7 +200,9 @@
     }
 
     .headline h2{
-      font-size:clamp(28px,4.8vw,50px);
+      font-size:
+        clamp(28px,4.8vw,50px);
+
       line-height:1.05;
       margin:0 0 8px;
       font-weight:900;
@@ -214,6 +238,7 @@
     .box h3{
       font-size:16px;
       margin:0 0 8px;
+
       border-bottom:1px solid var(--line);
       padding-bottom:6px;
     }
@@ -226,6 +251,10 @@
     .red{
       color:var(--red);
     }
+
+    /* =========================
+       区块
+    ========================= */
 
     .section-title{
       display:flex;
@@ -247,6 +276,10 @@
       color:var(--muted);
     }
 
+    /* =========================
+       分类
+    ========================= */
+
     .tabs{
       display:flex;
       gap:6px;
@@ -263,6 +296,7 @@
 
       font-size:12px;
       border-radius:0;
+
       color:var(--ink);
     }
 
@@ -271,6 +305,10 @@
       background:var(--ink);
       color:var(--paper);
     }
+
+    /* =========================
+       搜索
+    ========================= */
 
     .toolbar{
       display:grid;
@@ -283,9 +321,11 @@
       width:100%;
 
       border:1px solid var(--line);
+
       background:rgba(255,255,255,.45);
 
       padding:9px 10px;
+
       outline:none;
     }
 
@@ -294,8 +334,13 @@
       gap:5px;
     }
 
+    /* =========================
+       帖子
+    ========================= */
+
     .post{
       border-top:1px solid var(--line);
+
       padding:14px 0;
 
       display:grid;
@@ -316,6 +361,7 @@
     .post-title-btn{
       border:0;
       background:none;
+
       padding:0;
 
       text-align:left;
@@ -335,6 +381,7 @@
       line-height:1.9;
 
       white-space:pre-wrap;
+
       padding:12px 0;
     }
 
@@ -349,11 +396,13 @@
       flex-wrap:wrap;
 
       border-top:1px solid var(--line);
+
       padding-top:10px;
     }
 
     .privacy-note{
-      border:1px solid #8b1e2d;
+      border:1px solid var(--red);
+
       background:rgba(139,30,45,.06);
 
       padding:8px 10px;
@@ -392,6 +441,7 @@
       font-size:13px;
       line-height:1.75;
       margin:0;
+
       white-space:pre-wrap;
     }
 
@@ -403,6 +453,7 @@
       padding:2px 6px;
 
       font-size:10px;
+
       margin-right:5px;
     }
 
@@ -414,6 +465,7 @@
 
     .action{
       border:1px solid #777064;
+
       background:transparent;
 
       padding:5px 8px;
@@ -432,8 +484,13 @@
       color:var(--muted);
     }
 
+    /* =========================
+       投稿
+    ========================= */
+
     .compose{
       border:2px solid var(--line);
+
       padding:14px;
 
       background:rgba(255,253,247,.72);
@@ -468,6 +525,7 @@
       background:rgba(255,255,255,.5);
 
       padding:9px;
+
       outline:none;
     }
 
@@ -486,6 +544,10 @@
 
       padding:10px 18px;
     }
+
+    /* =========================
+       规则
+    ========================= */
 
     .rules{
       border-top:3px double var(--line);
@@ -509,6 +571,10 @@
       font-size:11px;
     }
 
+    /* =========================
+       弹窗
+    ========================= */
+
     .modal-backdrop{
       position:fixed;
       inset:0;
@@ -531,6 +597,7 @@
 
     .modal{
       width:min(620px,100%);
+
       max-height:90vh;
 
       overflow:auto;
@@ -545,6 +612,7 @@
     .modal-head{
       display:flex;
       justify-content:space-between;
+
       gap:10px;
 
       border-bottom:1px solid var(--line);
@@ -587,8 +655,13 @@
       padding:9px;
     }
 
+    /* =========================
+       底部导航
+    ========================= */
+
     .bottom-nav{
       position:fixed;
+
       z-index:15;
 
       left:50%;
@@ -597,6 +670,7 @@
       transform:translateX(-50%);
 
       width:min(680px,100%);
+
       height:64px;
 
       background:rgba(247,244,235,.97);
@@ -622,7 +696,9 @@
 
     .nav-btn strong{
       display:block;
+
       font-size:16px;
+
       margin-bottom:2px;
     }
 
@@ -640,6 +716,7 @@
       color:var(--paper);
 
       display:flex;
+
       align-items:center;
       justify-content:center;
 
@@ -650,13 +727,19 @@
       font-size:24px;
     }
 
+    /* =========================
+       Toast
+    ========================= */
+
     .toast{
       position:fixed;
 
       left:50%;
       bottom:80px;
 
-      transform:translateX(-50%) translateY(15px);
+      transform:
+        translateX(-50%)
+        translateY(15px);
 
       background:var(--ink);
       color:var(--paper);
@@ -666,6 +749,7 @@
       font-size:12px;
 
       opacity:0;
+
       pointer-events:none;
 
       transition:.2s;
@@ -675,8 +759,15 @@
 
     .toast.show{
       opacity:1;
-      transform:translateX(-50%) translateY(0);
+
+      transform:
+        translateX(-50%)
+        translateY(0);
     }
+
+    /* =========================
+       手机端
+    ========================= */
 
     @media(max-width:760px){
 
@@ -729,601 +820,462 @@
 
 <body>
 
-<main id="top" class="page">
+  <main id="top" class="page">
 
-  <header class="masthead">
+    <!-- =========================
+         报纸头部
+    ========================= -->
 
-    <div class="datebar">
-      <span>海南中学校园报</span>
-      <span id="today"></span>
-      <span>匿名发行</span>
-    </div>
+    <header class="masthead">
 
-    <h1 class="brand">CAT TIMES</h1>
+      <div class="datebar">
+        <span>海南中学校园报</span>
+        <span id="today"></span>
+        <span>匿名发行</span>
+      </div>
 
-    <div class="sub">
-      校园 · 生活 · 吐槽 · 见闻
-    </div>
+      <h1 class="brand">CAT TIMES</h1>
 
-    <div class="ticker">
-      <span>本报坚持匿名交流原则</span>
-      <span>请勿发布隐私、威胁、骚扰或人身攻击内容</span>
-      <span>今日校园：又到了该吐槽的时候</span>
-    </div>
+      <div class="sub">
+        校园 · 生活 · 吐槽 · 见闻
+      </div>
 
-  </header>
+      <div class="ticker">
+        <span>本报坚持匿名交流原则</span>
+        <span>请勿发布隐私、威胁、骚扰或人身攻击内容</span>
+        <span>今日校园：又到了该吐槽的时候</span>
+      </div>
+
+    </header>
 
 
-  <section class="layout">
+    <!-- =========================
+         首页头版
+    ========================= -->
 
-    <div>
+    <section class="layout">
 
-      <article class="headline">
+      <div>
 
-        <div class="kicker">
-          今日头条 · 校园现场
-        </div>
+        <article class="headline">
 
-        <h2>
-          那些没人敢在班里说，却忍不住想说的话
-        </h2>
+          <div class="kicker">
+            今日头条 · 校园现场
+          </div>
 
-        <p class="dek">
-          这里是一个匿名的校园交流角落。
-          可以吐槽，也可以分享；
-          可以认真讨论，也可以讲一点只有校园人才懂的梗。
-        </p>
+          <h2>
+            那些没人敢在班里说，却忍不住想说的话
+          </h2>
 
-        <div class="columns">
-
-          <p>
-            校园生活从来不只有课表、考试和成绩。
-            食堂排队、宿舍熄灯、跑操、社团、老师的一句话，
-            都可能成为一天里最值得记住的小事。
+          <p class="dek">
+            这里是一个匿名的校园交流角落。
+            可以吐槽，也可以分享；
+            可以认真讨论，也可以讲一点只有校园人才懂的梗。
           </p>
 
-          <p>
-            如果你有想说的话，可以匿名投稿。
-            发帖前请先确认内容不会暴露他人的电话号码、
-            住址、账号等个人信息。
-          </p>
+          <div class="columns">
 
-        </div>
+            <p>
+              校园生活从来不只有课表、考试和成绩。
+              食堂排队、宿舍熄灯、跑操、社团、
+              老师的一句话，都可能成为一天里最值得记住的小事。
+            </p>
 
-      </article>
-
-
-      <section id="posts">
-
-        <div class="section-title">
-          <h2>校园帖子</h2>
-          <small id="postCount">正在读取</small>
-        </div>
-
-        <div id="categories" class="tabs"></div>
-
-        <div class="toolbar">
-
-          <input
-            id="searchInput"
-            class="search"
-            placeholder="搜索帖子标题、内容或分类"
-          >
-
-          <div class="sorts">
-
-            <button
-              class="sort-btn active"
-              data-sort="latest"
-            >
-              最新
-            </button>
-
-            <button
-              class="sort-btn"
-              data-sort="hot"
-            >
-              热门
-            </button>
+            <p>
+              如果你有想说的话，可以匿名投稿。
+              发帖前请先确认内容不会暴露他人的电话号码、
+              住址、账号等个人信息。
+            </p>
 
           </div>
 
-        </div>
+        </article>
 
-        <div id="postList">
-          <div class="empty">
-            正在读取校园消息……
+
+        <!-- =========================
+             帖子区
+        ========================= -->
+
+        <section id="posts">
+
+          <div class="section-title">
+
+            <h2>
+              校园帖子
+            </h2>
+
+            <small id="postCount">
+              正在读取
+            </small>
+
           </div>
-        </div>
-
-      </section>
 
 
-      <section id="compose">
-
-        <div class="section-title">
-          <h2>匿名投稿</h2>
-          <small>说点你真正想说的</small>
-        </div>
-
-        <div class="compose">
-
-          <form id="postForm">
-
-            <div class="form-grid">
-
-              <div class="field">
-
-                <label>
-                  昵称（可留空）
-                </label>
-
-                <input
-                  id="nickname"
-                  maxlength="30"
-                  placeholder="匿名用户"
-                >
-
-              </div>
+          <div id="categories" class="tabs"></div>
 
 
-              <div class="field">
+          <div class="toolbar">
 
-                <label>
-                  分类
-                </label>
+            <input
+              id="searchInput"
+              class="search"
+              placeholder="搜索帖子标题、内容或分类"
+            >
 
-                <select id="category"></select>
+            <div class="sorts">
 
-              </div>
+              <button
+                class="sort-btn active"
+                data-sort="latest"
+              >
+                最新
+              </button>
+
+              <button
+                class="sort-btn"
+                data-sort="hot"
+              >
+                热门
+              </button>
+
+            </div>
+
+          </div>
 
 
-              <div class="field full">
+          <div id="postList">
 
-                <label>
-                  标题
-                </label>
+            <div class="empty">
+              正在读取校园消息……
+            </div>
 
-                <input
-                  id="title"
-                  required
-                  maxlength="100"
-                  placeholder="给这件事起个标题"
-                >
+          </div>
 
-              </div>
+        </section>
 
 
-              <div class="field full">
+        <!-- =========================
+             投稿
+        ========================= -->
 
-                <label>
-                  正文
-                </label>
+        <section id="compose">
 
-                <textarea
-                  id="content"
-                  required
-                  maxlength="5000"
-                  placeholder="写下你想说的……"
-                ></textarea>
+          <div class="section-title">
 
-                <div class="privacy-note">
-                  投稿前请检查：
-                  不要公开姓名、手机号、住址、账号等个人信息；
-                  不要发布威胁、骚扰或恶意造谣内容。
+            <h2>
+              匿名投稿
+            </h2>
+
+            <small>
+              投稿即表示同意社区规则
+            </small>
+
+          </div>
+
+
+          <div class="compose">
+
+            <form id="postForm">
+
+              <div class="form-grid">
+
+                <div class="field">
+
+                  <label>
+                    昵称
+                  </label>
+
+                  <input
+                    id="nickname"
+                    maxlength="30"
+                    placeholder="不填则显示匿名用户"
+                  >
+
+                </div>
+
+
+                <div class="field">
+
+                  <label>
+                    分类
+                  </label>
+
+                  <select id="category"></select>
+
+                </div>
+
+
+                <div class="field full">
+
+                  <label>
+                    标题
+                  </label>
+
+                  <input
+                    id="title"
+                    maxlength="100"
+                    required
+                    placeholder="给这条校园消息起个标题"
+                  >
+
+                </div>
+
+
+                <div class="field full">
+
+                  <label>
+                    内容
+                  </label>
+
+                  <textarea
+                    id="content"
+                    maxlength="3000"
+                    required
+                    placeholder="想说什么就写什么……但请不要发布他人的隐私信息。"
+                  ></textarea>
+
                 </div>
 
               </div>
 
-            </div>
+
+              <div class="privacy-note">
+                提醒：不要发布身份证号、手机号、住址、私人账号、
+                密码等敏感信息，也不要发布威胁、骚扰或恶意曝光内容。
+              </div>
 
 
-            <button
-              class="submit"
-              type="submit"
-            >
-              匿名发布
-            </button>
+              <button
+                class="submit"
+                type="submit"
+              >
+                发布匿名投稿
+              </button>
 
-          </form>
+            </form>
 
-        </div>
+          </div>
 
-      </section>
-
-    </div>
+        </section>
 
 
-    <aside>
+        <!-- =========================
+             规则
+        ========================= -->
 
-      <div class="box">
+        <section class="rules">
 
-        <h3>校园快讯</h3>
+          <strong>
+            社区规则
+          </strong>
 
-        <div class="mini">
-          这里不追求官方口径，
-          只记录同学们眼中的校园日常。
-        </div>
+          <br>
 
-      </div>
+          ① 可以吐槽学校生活、课程、食堂、住宿、社团等。
 
+          <br>
 
-      <div class="box">
+          ② 不得发布身份证号、电话号码、住址、账号密码等个人隐私。
 
-        <h3>食堂谜案</h3>
+          <br>
 
-        <div class="mini">
-          今天吃什么，
-          永远是一道没有标准答案的题。
-        </div>
+          ③ 不得进行威胁、骚扰、恶意曝光或持续性人身攻击。
 
-      </div>
+          <br>
 
+          ④ 对涉嫌违法、有害或严重侵犯他人权益的内容，应及时举报。
 
-      <div class="box">
+          <br>
 
-        <h3>宿舍哲学</h3>
+          ⑤ 本站目前属于匿名交流 MVP，无法保证绝对防刷、防骚扰。
 
-        <div class="mini">
-          当熄灯时间越来越近，
-          所有人突然开始讨论人生。
-        </div>
-
-      </div>
+        </section>
 
 
-      <div class="box">
+        <footer class="footer">
 
-        <h3>跑操传说</h3>
+          CAT TIMES · 海南中学校园匿名交流墙
 
-        <div class="mini">
-          风很大，队伍很长，
-          而终点依然遥远。
-        </div>
+        </footer>
 
       </div>
 
 
-      <div class="box">
+      <!-- =========================
+           右侧报纸栏
+      ========================= -->
 
-        <h3>猫猫守则</h3>
+      <aside>
 
-        <div class="mini">
+        <div class="box">
 
-          其一：可以吐槽事情，不要泄露隐私。<br>
+          <h3>
+            今日社论
+          </h3>
 
-          其二：可以表达不满，不要威胁他人。<br>
+          <div class="mini">
 
-          其三：可以玩梗，不要把伤害当玩笑。<br>
+            有些话适合说出来。
 
-          其四：发现违规内容，请及时举报。
+            <br><br>
+
+            但说出来之前，也值得想一秒：
+
+            <br>
+
+            这句话是在表达自己，
+
+            还是在伤害别人？
+
+          </div>
 
         </div>
 
-      </div>
 
+        <div class="box">
 
-      <div class="box">
+          <h3>
+            投稿须知
+          </h3>
 
-        <h3>关于本站</h3>
+          <div class="mini">
 
-        <div class="mini">
-          本站为匿名校园交流页面，
-          不代表学校官方立场。
-          内容由用户自行发布。
+            匿名并不意味着可以无限制地伤害别人。
+
+            <br><br>
+
+            我们鼓励：
+
+            <br>
+            <span class="red">吐槽、分享、讨论、梗文化。</span>
+
+            <br><br>
+
+            不鼓励：
+
+            <br>
+            隐私曝光、威胁、骚扰、人肉。
+
+          </div>
+
         </div>
 
-      </div>
 
-    </aside>
+        <div class="box">
 
-  </section>
+          <h3>
+            本站状态
+          </h3>
+
+          <div class="mini">
+
+            数据库：
+            <span class="red">在线尝试连接</span>
+
+            <br>
+
+            投稿：
+            匿名
+
+            <br>
+
+            评论：
+            匿名
+
+            <br>
+
+            点赞：
+            本地访客识别
+
+          </div>
+
+        </div>
 
 
-  <section class="rules">
+        <div class="box">
 
-    <strong>使用说明：</strong>
+          <h3>
+            今日猫报
+          </h3>
 
-    请勿发布真实姓名、手机号、住址、账号密码等个人信息；
-    禁止威胁、骚扰、恶意造谣及违法内容。
+          <div class="mini">
 
-    本站目前采用匿名访客标识用于点赞与举报，
-    不用于公开展示。
+            一只猫路过校园。
 
-  </section>
+            <br>
+
+            它什么也没说。
+
+            <br>
+
+            但它似乎知道所有事情。
+
+          </div>
+
+        </div>
+
+      </aside>
+
+    </section>
+
+  </main>
 
 
-  <footer class="footer">
-    CAT TIMES · 海南中学校园匿名交流墙
-  </footer>
+  <!-- =========================
+       帖子详情弹窗
+  ========================= -->
 
-</main>
-
-
-<nav
-  class="bottom-nav"
-  aria-label="底部导航"
->
-
-  <button
-    class="nav-btn"
-    data-go="top"
+  <div
+    id="detailModal"
+    class="modal-backdrop"
   >
-    <strong>⌂</strong>
-    首页
-  </button>
 
+    <div class="modal">
 
-  <button
-    class="nav-btn"
-    data-go="categories"
-  >
-    <strong>▤</strong>
-    板块
-  </button>
+      <div class="modal-head">
 
+        <h3 id="detailTitle">
+          帖子详情
+        </h3>
 
-  <button
-    class="nav-btn center"
-    data-go="compose"
-  >
-    <strong>＋</strong>
-    发布
-  </button>
+        <button
+          class="close"
+          data-close="detailModal"
+        >
+          ×
+        </button>
 
+      </div>
 
-  <button
-    class="nav-btn"
-    id="hotNav"
-  >
-    <strong>★</strong>
-    热门
-  </button>
 
+      <div
+        id="detailMeta"
+        class="detail-meta"
+        style="margin-top:10px"
+      ></div>
 
-  <button
-    class="nav-btn"
-    id="myNav"
-  >
-    <strong>○</strong>
-    我的
-  </button>
 
-</nav>
+      <div
+        id="detailBody"
+        class="detail-body"
+      ></div>
 
 
-<div
-  id="detailModal"
-  class="modal-backdrop"
->
+      <div class="detail-actions">
 
-  <div class="modal">
+        <button
+          id="detailLike"
+          class="action"
+        >
+          ♡ 0 点赞
+        </button>
 
-    <div class="modal-head">
+        <button
+          id="detailComment"
+          class="action"
+        >
+          评论
+        </button>
 
-      <h3 id="detailTitle">
-        帖子详情
-      </h3>
-
-      <button
-        class="close"
-        data-close="detailModal"
-      >
-        ×
-      </button>
-
-    </div>
-
-
-    <div
-      id="detailMeta"
-      class="detail-meta"
-    ></div>
-
-
-    <div
-      id="detailBody"
-      class="detail-body"
-    ></div>
-
-
-    <div class="detail-actions">
-
-      <button
-        class="action"
-        id="detailLike"
-      >
-        ♡ 点赞
-      </button>
-
-      <button
-        class="action"
-        id="detailComment"
-      >
-        评论
-      </button>
-
-      <button
-        class="action"
-        id="detailReport"
-      >
-        举报
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<div
-  id="commentModal"
-  class="modal-backdrop"
->
-
-  <div class="modal">
-
-    <div class="modal-head">
-
-      <h3 id="commentTitle">
-        评论
-      </h3>
-
-      <button
-        class="close"
-        data-close="commentModal"
-      >
-        ×
-      </button>
-
-    </div>
-
-
-    <div
-      id="commentList"
-      class="comment-list"
-    ></div>
-
-
-    <form
-      id="commentForm"
-      class="comment-form"
-    >
-
-      <textarea
-        id="commentContent"
-        required
-        maxlength="1000"
-        placeholder="写下你的评论……"
-      ></textarea>
-
-      <button
-        class="submit"
-        type="submit"
-      >
-        匿名评论
-      </button>
-
-    </form>
-
-  </div>
-
-</div>
-
-
-<div
-  id="reportModal"
-  class="modal-backdrop"
->
-
-  <div class="modal">
-
-    <div class="modal-head">
-
-      <h3>
-        举报帖子
-      </h3>
-
-      <button
-        class="close"
-        data-close="reportModal"
-      >
-        ×
-      </button>
-
-    </div>
-
-
-    <form
-      id="reportForm"
-      class="comment-form"
-    >
-
-      <textarea
-        id="reportReason"
-        required
-        maxlength="500"
-        placeholder="请说明举报原因"
-      ></textarea>
-
-      <button
-        class="submit"
-        type="submit"
-      >
-        提交举报
-      </button>
-
-    </form>
-
-  </div>
-
-</div>
-
-
-<div
-  id="toast"
-  class="toast"
-></div>
-
-
-<script>
-
-const SUPABASE_URL =
-  "https://txaovuikygbeegaancxt.supabase.co";
-
-const SUPABASE_KEY =
-  "sb_publishable__pHD0KU1vXv1Daw5X3rOcg_5V2Ot3-y";
-
-const db =
-  supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
-
-
-const CATEGORIES = [
-  "全部",
-  "校园生活",
-  "学习压力",
-  "食堂住宿",
-  "老师教学",
-  "社团活动",
-  "校园设施",
-  "其他"
-];
-
-
-let posts = [];
-
-let likes = new Set();
-
-let currentCategory = "全部";
-
-let currentSort = "latest";
-
-let searchText = "";
-
-let activePostId = null;
-
-
-let lastSubmitAt =
-  Number(
-    localStorage.getItem("hnxz_last_submit") || 0
-  );
-
-
-const MIN_POST_INTERVAL = 60000;
-
-
-let visitorId =
-  localStorage.getItem("hnxz_visitor");
-
-
-if(!visitorId){
-
-  visitorId =
-    crypto.randomUUID
-      ? crypto.randomUUID()
-      : Date.now() +
-   
+        <button
+          id="d

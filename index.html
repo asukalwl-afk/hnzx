@@ -24,119 +24,149 @@
     }
 
     *{
-      box-sizing:border-box
+      box-sizing:border-box;
     }
 
     html{
-      scroll-behavior:smooth
+      scroll-behavior:smooth;
     }
 
     body{
       margin:0;
       color:var(--ink);
       background:
-        radial-gradient(circle at 20% 10%,rgba(0,0,0,.035) 0 1px,transparent 1.5px),
-        radial-gradient(circle at 70% 35%,rgba(0,0,0,.025) 0 1px,transparent 1.5px),
-        linear-gradient(90deg,rgba(0,0,0,.018) 50%,transparent 50%);
+        radial-gradient(
+          circle at 20% 10%,
+          rgba(0,0,0,.035) 0 1px,
+          transparent 1.5px
+        ),
+        radial-gradient(
+          circle at 70% 35%,
+          rgba(0,0,0,.025) 0 1px,
+          transparent 1.5px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(0,0,0,.018) 50%,
+          transparent 50%
+        );
+
       background-size:23px 19px,31px 27px,5px 5px;
       background-color:var(--paper);
-      font-family:Georgia,"Noto Serif SC","Songti SC",serif;
+
+      font-family:
+        Georgia,
+        "Noto Serif SC",
+        "Songti SC",
+        serif;
+
       padding-bottom:82px;
     }
 
     body:before{
       content:"🐱   🐈   😺   🐈‍⬛   😸   😼   🐱   🐈";
+
       position:fixed;
       inset:0;
       z-index:-1;
       pointer-events:none;
+
       color:#000;
       opacity:.065;
+
       font-family:system-ui,sans-serif;
       font-size:42px;
       line-height:2.8;
       letter-spacing:12vw;
       word-spacing:7vw;
+
       transform:rotate(-7deg) scale(1.08);
       overflow:hidden;
     }
 
     a{
-      color:inherit
+      color:inherit;
     }
 
     button,
     input,
     textarea,
     select{
-      font:inherit
+      font:inherit;
     }
 
     button{
-      cursor:pointer
+      cursor:pointer;
     }
 
     .page{
       width:min(1120px,calc(100% - 24px));
-      margin:0 auto
+      margin:0 auto;
     }
 
     .masthead{
       padding:18px 0 8px;
       text-align:center;
-      border-bottom:3px double var(--line)
+      border-bottom:3px double var(--line);
     }
 
     .datebar{
       display:flex;
       justify-content:space-between;
       gap:12px;
+
       border-bottom:1px solid var(--line);
+
       padding:5px 0;
+
       font-size:12px;
-      letter-spacing:.08em
+      letter-spacing:.08em;
     }
 
     .brand{
       margin:7px 0 0;
+
       font-family:"UnifrakturCook",serif;
       font-size:clamp(58px,10vw,106px);
+
       line-height:.9;
       font-weight:700;
-      letter-spacing:.02em
+      letter-spacing:.02em;
     }
 
     .sub{
       font-size:13px;
       letter-spacing:.32em;
-      margin:8px 0 2px
+      margin:8px 0 2px;
     }
 
     .ticker{
       border-top:1px solid var(--line);
       border-bottom:1px solid var(--line);
+
       margin-top:10px;
       padding:7px 0;
+
       font-size:12px;
       overflow:hidden;
-      white-space:nowrap
+      white-space:nowrap;
     }
 
     .ticker span{
       display:inline-block;
-      margin-right:28px
+      margin-right:28px;
     }
 
     .layout{
       display:grid;
       grid-template-columns:1.55fr .85fr;
       gap:18px;
-      margin-top:16px
+      margin-top:16px;
     }
 
     .headline{
       border-bottom:3px solid var(--line);
-      padding-bottom:12px
+      padding-bottom:12px;
     }
 
     .kicker{
@@ -144,421 +174,554 @@
       font-weight:bold;
       letter-spacing:.12em;
       color:var(--red);
-      margin-bottom:7px
+      margin-bottom:7px;
     }
 
     .headline h2{
       font-size:clamp(28px,4.8vw,50px);
       line-height:1.05;
       margin:0 0 8px;
-      font-weight:900
+      font-weight:900;
     }
 
     .dek{
       font-size:14px;
       line-height:1.7;
       color:#3f3a33;
-      margin:0
+      margin:0;
     }
 
     .columns{
       column-count:2;
       column-gap:22px;
-      margin-top:13px
+      margin-top:13px;
     }
 
     .columns p{
       font-size:13px;
       line-height:1.85;
       margin:0 0 12px;
-      text-align:justify
+      text-align:justify;
     }
 
     .box{
       border:1.5px solid var(--line);
       background:rgba(255,253,247,.62);
       padding:12px;
-      margin-bottom:14px
+      margin-bottom:14px;
     }
 
     .box h3{
       font-size:16px;
       margin:0 0 8px;
       border-bottom:1px solid var(--line);
-      padding-bottom:6px
+      padding-bottom:6px;
     }
 
     .mini{
       font-size:12px;
-      line-height:1.7
+      line-height:1.7;
     }
 
     .red{
-      color:var(--red)
+      color:var(--red);
     }
 
     .section-title{
       display:flex;
       align-items:end;
       justify-content:space-between;
+
       border-bottom:3px double var(--line);
+
       padding-bottom:7px;
-      margin:22px 0 10px
+      margin:22px 0 10px;
     }
 
     .section-title h2{
       font-size:24px;
-      margin:0
+      margin:0;
     }
 
     .section-title small{
-      color:var(--muted)
+      color:var(--muted);
     }
 
     .tabs{
       display:flex;
       gap:6px;
       flex-wrap:wrap;
-      margin-bottom:10px
+      margin-bottom:10px;
     }
 
     .tab,
     .sort-btn{
       border:1px solid var(--line);
       background:transparent;
+
       padding:6px 10px;
+
       font-size:12px;
       border-radius:0;
-      color:var(--ink)
+      color:var(--ink);
     }
 
     .tab.active,
     .sort-btn.active{
       background:var(--ink);
-      color:var(--paper)
+      color:var(--paper);
     }
 
     .toolbar{
       display:grid;
       grid-template-columns:1fr auto;
       gap:8px;
-      margin-bottom:10px
+      margin-bottom:10px;
     }
 
     .search{
       width:100%;
+
       border:1px solid var(--line);
       background:rgba(255,255,255,.45);
+
       padding:9px 10px;
-      outline:none
+      outline:none;
     }
 
     .sorts{
       display:flex;
-      gap:5px
+      gap:5px;
     }
 
     .post{
       border-top:1px solid var(--line);
       padding:14px 0;
+
       display:grid;
       grid-template-columns:1fr auto;
-      gap:10px
+      gap:10px;
     }
 
     .post:first-child{
-      border-top:0
+      border-top:0;
     }
 
     .post h3{
       font-size:20px;
       line-height:1.25;
-      margin:0 0 5px
+      margin:0 0 5px;
+    }
+
+    .post-title-btn{
+      border:0;
+      background:none;
+      padding:0;
+
+      text-align:left;
+
+      font:inherit;
+      color:inherit;
+
+      cursor:pointer;
+    }
+
+    .post-title-btn:hover{
+      text-decoration:underline;
+    }
+
+    .detail-body{
+      font-size:14px;
+      line-height:1.9;
+
+      white-space:pre-wrap;
+      padding:12px 0;
+    }
+
+    .detail-meta{
+      font-size:11px;
+      color:var(--muted);
+    }
+
+    .detail-actions{
+      display:flex;
+      gap:6px;
+      flex-wrap:wrap;
+
+      border-top:1px solid var(--line);
+      padding-top:10px;
+    }
+
+    .privacy-note{
+      border:1px solid #8b1e2d;
+      background:rgba(139,30,45,.06);
+
+      padding:8px 10px;
+
+      font-size:12px;
+      line-height:1.6;
+
+      margin-top:8px;
+    }
+
+    .my-stat{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:6px;
+      margin-top:10px;
+    }
+
+    .my-stat div{
+      border:1px solid #aaa295;
+      padding:8px;
+      text-align:center;
+    }
+
+    .my-stat b{
+      display:block;
+      font-size:18px;
     }
 
     .meta{
       font-size:11px;
       color:var(--muted);
-      margin-bottom:8px
+      margin-bottom:8px;
     }
 
     .post p{
       font-size:13px;
       line-height:1.75;
       margin:0;
-      white-space:pre-wrap
+      white-space:pre-wrap;
     }
 
     .tag{
       display:inline-block;
+
       border:1px solid #777064;
+
       padding:2px 6px;
+
       font-size:10px;
-      margin-right:5px
+      margin-right:5px;
     }
 
     .post-actions{
       display:flex;
       gap:5px;
-      align-items:flex-start
+      align-items:flex-start;
     }
 
     .action{
       border:1px solid #777064;
       background:transparent;
+
       padding:5px 8px;
-      font-size:12px
+
+      font-size:12px;
     }
 
     .action.liked{
       color:var(--red);
-      border-color:var(--red)
+      border-color:var(--red);
     }
 
     .empty{
       text-align:center;
       padding:30px 0;
-      color:var(--muted)
+      color:var(--muted);
     }
 
     .compose{
       border:2px solid var(--line);
       padding:14px;
-      background:rgba(255,253,247,.72)
+
+      background:rgba(255,253,247,.72);
     }
 
     .form-grid{
       display:grid;
       grid-template-columns:1fr 1fr;
-      gap:9px
+      gap:9px;
     }
 
     .field{
       display:flex;
       flex-direction:column;
-      gap:4px
+      gap:4px;
     }
 
     .field.full{
-      grid-column:1/-1
+      grid-column:1/-1;
     }
 
     .field label{
       font-size:12px;
-      font-weight:bold
+      font-weight:bold;
     }
 
     .field input,
     .field textarea,
     .field select{
       border:1px solid var(--line);
+
       background:rgba(255,255,255,.5);
+
       padding:9px;
-      outline:none
+      outline:none;
     }
 
     .field textarea{
       min-height:125px;
-      resize:vertical
+      resize:vertical;
     }
 
     .submit{
       margin-top:10px;
+
       background:var(--ink);
       color:var(--paper);
+
       border:0;
-      padding:10px 18px
+
+      padding:10px 18px;
     }
 
     .rules{
       border-top:3px double var(--line);
+
       margin-top:22px;
       padding-top:12px;
+
       font-size:12px;
-      line-height:1.8
+      line-height:1.8;
     }
 
     .footer{
       text-align:center;
+
       border-top:1px solid var(--line);
+
       margin-top:22px;
       padding:15px 0;
+
       color:var(--muted);
-      font-size:11px
+      font-size:11px;
     }
 
     .modal-backdrop{
       position:fixed;
       inset:0;
+
       background:rgba(0,0,0,.58);
+
       display:none;
+
       align-items:center;
       justify-content:center;
+
       padding:15px;
-      z-index:20
+
+      z-index:20;
     }
 
     .modal-backdrop.show{
-      display:flex
+      display:flex;
     }
 
     .modal{
       width:min(620px,100%);
       max-height:90vh;
+
       overflow:auto;
+
       background:var(--paper);
+
       border:2px solid var(--line);
-      padding:15px
+
+      padding:15px;
     }
 
     .modal-head{
       display:flex;
       justify-content:space-between;
       gap:10px;
+
       border-bottom:1px solid var(--line);
-      padding-bottom:8px
+
+      padding-bottom:8px;
     }
 
     .modal-head h3{
-      margin:0
+      margin:0;
     }
 
     .close{
       border:0;
       background:transparent;
-      font-size:22px
+      font-size:22px;
     }
 
     .comment{
       border-bottom:1px solid #aaa295;
+
       padding:9px 0;
+
       font-size:13px;
-      line-height:1.7
+      line-height:1.7;
     }
 
     .comment-form{
-      margin-top:12px
+      margin-top:12px;
     }
 
     .comment-form textarea{
       width:100%;
+
       min-height:90px;
+
       border:1px solid var(--line);
+
       background:transparent;
-      padding:9px
+
+      padding:9px;
     }
 
     .bottom-nav{
       position:fixed;
       z-index:15;
+
       left:50%;
       bottom:0;
+
       transform:translateX(-50%);
+
       width:min(680px,100%);
       height:64px;
+
       background:rgba(247,244,235,.97);
+
       border:1px solid var(--line);
       border-bottom:0;
+
       display:grid;
       grid-template-columns:repeat(5,1fr);
-      box-shadow:0 -5px 20px rgba(0,0,0,.08)
+
+      box-shadow:0 -5px 20px rgba(0,0,0,.08);
     }
 
     .nav-btn{
       border:0;
       background:transparent;
+
       font-size:11px;
       color:var(--ink);
-      padding:6px 2px
+
+      padding:6px 2px;
     }
 
     .nav-btn strong{
       display:block;
       font-size:16px;
-      margin-bottom:2px
+      margin-bottom:2px;
     }
 
     .nav-btn.center{
-      position:relative
+      position:relative;
     }
 
     .nav-btn.center strong{
       width:42px;
       height:42px;
+
       border-radius:50%;
+
       background:var(--ink);
       color:var(--paper);
+
       display:flex;
       align-items:center;
       justify-content:center;
+
       margin:-17px auto 2px;
+
       border:4px solid var(--paper);
-      font-size:24px
+
+      font-size:24px;
     }
 
     .toast{
       position:fixed;
+
       left:50%;
       bottom:80px;
+
       transform:translateX(-50%) translateY(15px);
+
       background:var(--ink);
       color:var(--paper);
+
       padding:8px 13px;
+
       font-size:12px;
+
       opacity:0;
       pointer-events:none;
+
       transition:.2s;
-      z-index:30
+
+      z-index:30;
     }
 
     .toast.show{
       opacity:1;
-      transform:translateX(-50%) translateY(0)
+      transform:translateX(-50%) translateY(0);
     }
 
     @media(max-width:760px){
+
       .page{
-        width:min(100% - 16px,680px)
+        width:min(100% - 16px,680px);
       }
 
       .layout{
-        grid-template-columns:1fr
+        grid-template-columns:1fr;
       }
 
       .columns{
-        column-count:1
+        column-count:1;
       }
 
       .datebar{
-        font-size:10px
+        font-size:10px;
       }
 
       .form-grid{
-        grid-template-columns:1fr
+        grid-template-columns:1fr;
       }
 
       .field.full{
-        grid-column:auto
+        grid-column:auto;
       }
 
       .toolbar{
-        grid-template-columns:1fr
+        grid-template-columns:1fr;
       }
 
       .post{
-        grid-template-columns:1fr
+        grid-template-columns:1fr;
       }
 
       .post-actions{
-        justify-content:flex-start
+        justify-content:flex-start;
       }
 
       .headline h2{
-        font-size:31px
+        font-size:31px;
       }
 
       .box{
-        margin-bottom:10px
+        margin-bottom:10px;
       }
     }
   </style>
@@ -566,480 +729,542 @@
 
 <body>
 
-  <main id="top" class="page">
+<main id="top" class="page">
 
-    <header class="masthead">
+  <header class="masthead">
 
-      <div class="datebar">
-        <span>海南中学校园报</span>
-        <span id="today"></span>
-        <span>匿名发行</span>
-      </div>
+    <div class="datebar">
+      <span>海南中学校园报</span>
+      <span id="today"></span>
+      <span>匿名发行</span>
+    </div>
 
-      <h1 class="brand">CAT TIMES</h1>
+    <h1 class="brand">CAT TIMES</h1>
 
-      <div class="sub">
-        校园 · 生活 · 吐槽 · 见闻
-      </div>
+    <div class="sub">
+      校园 · 生活 · 吐槽 · 见闻
+    </div>
 
-      <div class="ticker">
-        <span>本报坚持匿名交流原则</span>
-        <span>请勿发布隐私、威胁、骚扰或人身攻击内容</span>
-        <span>今日校园：又到了该吐槽的时候</span>
-      </div>
+    <div class="ticker">
+      <span>本报坚持匿名交流原则</span>
+      <span>请勿发布隐私、威胁、骚扰或人身攻击内容</span>
+      <span>今日校园：又到了该吐槽的时候</span>
+    </div>
 
-    </header>
+  </header>
 
 
-    <section class="layout">
+  <section class="layout">
 
-      <div>
+    <div>
 
-        <article class="headline">
+      <article class="headline">
 
-          <div class="kicker">
-            今日头条 · 校园现场
-          </div>
+        <div class="kicker">
+          今日头条 · 校园现场
+        </div>
 
-          <h2>
-            那些没人敢在班里说，却忍不住想说的话
-          </h2>
+        <h2>
+          那些没人敢在班里说，却忍不住想说的话
+        </h2>
 
-          <p class="dek">
-            这里是一个匿名的校园交流角落。
-            可以吐槽，也可以分享；
-            可以认真讨论，也可以讲一点只有校园人才懂的梗。
+        <p class="dek">
+          这里是一个匿名的校园交流角落。
+          可以吐槽，也可以分享；
+          可以认真讨论，也可以讲一点只有校园人才懂的梗。
+        </p>
+
+        <div class="columns">
+
+          <p>
+            校园生活从来不只有课表、考试和成绩。
+            食堂排队、宿舍熄灯、跑操、社团、老师的一句话，
+            都可能成为一天里最值得记住的小事。
           </p>
 
-          <div class="columns">
+          <p>
+            如果你有想说的话，可以匿名投稿。
+            发帖前请先确认内容不会暴露他人的电话号码、
+            住址、账号等个人信息。
+          </p>
 
-            <p>
-              校园生活从来不只有课表、考试和成绩。
-              食堂排队、宿舍熄灯、跑操、社团、老师的一句话，
-              都可能成为一天里最值得记住的小事。
-            </p>
+        </div>
 
-            <p>
-              如果你有想说的话，可以匿名投稿。
-              发帖前请先确认内容不会暴露他人的电话号码、
-              住址、账号等个人信息。
-            </p>
-
-          </div>
-
-        </article>
+      </article>
 
 
-        <section id="posts">
+      <section id="posts">
 
-          <div class="section-title">
-            <h2>校园帖子</h2>
-            <small id="postCount">正在读取</small>
-          </div>
+        <div class="section-title">
+          <h2>校园帖子</h2>
+          <small id="postCount">正在读取</small>
+        </div>
 
-          <div id="categories" class="tabs"></div>
+        <div id="categories" class="tabs"></div>
 
-          <div class="toolbar">
+        <div class="toolbar">
 
-            <input
-              id="searchInput"
-              class="search"
-              placeholder="搜索帖子标题、内容或分类"
+          <input
+            id="searchInput"
+            class="search"
+            placeholder="搜索帖子标题、内容或分类"
+          >
+
+          <div class="sorts">
+
+            <button
+              class="sort-btn active"
+              data-sort="latest"
             >
+              最新
+            </button>
 
-            <div class="sorts">
-
-              <button
-                class="sort-btn active"
-                data-sort="latest"
-              >
-                最新
-              </button>
-
-              <button
-                class="sort-btn"
-                data-sort="hot"
-              >
-                热门
-              </button>
-
-            </div>
+            <button
+              class="sort-btn"
+              data-sort="hot"
+            >
+              热门
+            </button>
 
           </div>
 
-          <div id="postList">
-            <div class="empty">
-              正在读取校园消息……
-            </div>
+        </div>
+
+        <div id="postList">
+          <div class="empty">
+            正在读取校园消息……
           </div>
+        </div>
 
-        </section>
-
-
-        <section id="compose">
-
-          <div class="section-title">
-            <h2>匿名投稿</h2>
-            <small>说点你真正想说的</small>
-          </div>
-
-          <div class="compose">
-
-            <form id="postForm">
-
-              <div class="form-grid">
-
-                <div class="field">
-
-                  <label>
-                    昵称（可留空）
-                  </label>
-
-                  <input
-                    id="nickname"
-                    maxlength="30"
-                    placeholder="匿名用户"
-                  >
-
-                </div>
+      </section>
 
 
-                <div class="field">
+      <section id="compose">
 
-                  <label>
-                    分类
-                  </label>
+        <div class="section-title">
+          <h2>匿名投稿</h2>
+          <small>说点你真正想说的</small>
+        </div>
 
-                  <select id="category"></select>
+        <div class="compose">
 
-                </div>
+          <form id="postForm">
+
+            <div class="form-grid">
+
+              <div class="field">
+
+                <label>
+                  昵称（可留空）
+                </label>
+
+                <input
+                  id="nickname"
+                  maxlength="30"
+                  placeholder="匿名用户"
+                >
+
+              </div>
 
 
-                <div class="field full">
+              <div class="field">
 
-                  <label>
-                    标题
-                  </label>
+                <label>
+                  分类
+                </label>
 
-                  <input
-                    id="title"
-                    required
-                    maxlength="100"
-                    placeholder="给这件事起个标题"
-                  >
+                <select id="category"></select>
 
-                </div>
+              </div>
 
 
-                <div class="field full">
+              <div class="field full">
 
-                  <label>
-                    正文
-                  </label>
+                <label>
+                  标题
+                </label>
 
-                  <textarea
-                    id="content"
-                    required
-                    maxlength="5000"
-                    placeholder="写下你想说的……"
-                  ></textarea>
+                <input
+                  id="title"
+                  required
+                  maxlength="100"
+                  placeholder="给这件事起个标题"
+                >
 
+              </div>
+
+
+              <div class="field full">
+
+                <label>
+                  正文
+                </label>
+
+                <textarea
+                  id="content"
+                  required
+                  maxlength="5000"
+                  placeholder="写下你想说的……"
+                ></textarea>
+
+                <div class="privacy-note">
+                  投稿前请检查：
+                  不要公开姓名、手机号、住址、账号等个人信息；
+                  不要发布威胁、骚扰或恶意造谣内容。
                 </div>
 
               </div>
 
-              <button
-                class="submit"
-                type="submit"
-              >
-                匿名发布
-              </button>
+            </div>
 
-            </form>
 
-          </div>
+            <button
+              class="submit"
+              type="submit"
+            >
+              匿名发布
+            </button>
 
-        </section>
+          </form>
+
+        </div>
+
+      </section>
+
+    </div>
+
+
+    <aside>
+
+      <div class="box">
+
+        <h3>校园快讯</h3>
+
+        <div class="mini">
+          这里不追求官方口径，
+          只记录同学们眼中的校园日常。
+        </div>
 
       </div>
 
 
-      <aside>
+      <div class="box">
 
-        <div class="box">
+        <h3>食堂谜案</h3>
 
-          <h3>
-            校园快讯
-          </h3>
-
-          <div class="mini">
-            这里不追求官方口径，只记录同学们眼中的校园日常。
-          </div>
-
+        <div class="mini">
+          今天吃什么，
+          永远是一道没有标准答案的题。
         </div>
-
-
-        <div class="box">
-
-          <h3>
-            食堂谜案
-          </h3>
-
-          <div class="mini">
-            今天吃什么，永远是一道没有标准答案的题。
-          </div>
-
-        </div>
-
-
-        <div class="box">
-
-          <h3>
-            宿舍哲学
-          </h3>
-
-          <div class="mini">
-            当熄灯时间越来越近，所有人突然开始讨论人生。
-          </div>
-
-        </div>
-
-
-        <div class="box">
-
-          <h3>
-            跑操传说
-          </h3>
-
-          <div class="mini">
-            风很大，队伍很长，而终点依然遥远。
-          </div>
-
-        </div>
-
-
-        <div class="box">
-
-          <h3>
-            猫猫守则
-          </h3>
-
-          <div class="mini">
-
-            其一：可以吐槽事情，不要泄露隐私。
-            <br>
-
-            其二：可以表达不满，不要威胁他人。
-            <br>
-
-            其三：可以玩梗，不要把伤害当玩笑。
-            <br>
-
-            其四：发现违规内容，请及时举报。
-
-          </div>
-
-        </div>
-
-
-        <div class="box">
-
-          <h3>
-            关于本站
-          </h3>
-
-          <div class="mini">
-            本站为匿名校园交流页面，不代表学校官方立场。
-            内容由用户自行发布。
-          </div>
-
-        </div>
-
-      </aside>
-
-    </section>
-
-
-    <section class="rules">
-
-      <strong>
-        使用说明：
-      </strong>
-
-      请勿发布真实姓名、手机号、住址、账号密码等个人信息；
-      禁止威胁、骚扰、恶意造谣及违法内容。
-      本站目前采用匿名访客标识用于点赞与举报，不用于公开展示。
-
-    </section>
-
-
-    <footer class="footer">
-      CAT TIMES · 海南中学校园匿名交流墙
-    </footer>
-
-  </main>
-
-
-  <nav
-    class="bottom-nav"
-    aria-label="底部导航"
-  >
-
-    <button
-      class="nav-btn"
-      data-go="top"
-    >
-      <strong>⌂</strong>
-      首页
-    </button>
-
-
-    <button
-      class="nav-btn"
-      data-go="categories"
-    >
-      <strong>▤</strong>
-      板块
-    </button>
-
-
-    <button
-      class="nav-btn center"
-      data-go="compose"
-    >
-      <strong>＋</strong>
-      发布
-    </button>
-
-
-    <button
-      class="nav-btn"
-      id="hotNav"
-    >
-      <strong>★</strong>
-      热门
-    </button>
-
-
-    <button
-      class="nav-btn"
-      id="myNav"
-    >
-      <strong>○</strong>
-      我的
-    </button>
-
-  </nav>
-
-
-  <div
-    id="commentModal"
-    class="modal-backdrop"
-  >
-
-    <div class="modal">
-
-      <div class="modal-head">
-
-        <h3 id="commentTitle">
-          评论
-        </h3>
-
-        <button
-          class="close"
-          data-close="commentModal"
-        >
-          ×
-        </button>
 
       </div>
 
 
-      <div
-        id="commentList"
-        class="comment-list"
-      ></div>
+      <div class="box">
+
+        <h3>宿舍哲学</h3>
+
+        <div class="mini">
+          当熄灯时间越来越近，
+          所有人突然开始讨论人生。
+        </div>
+
+      </div>
 
 
-      <form
-        id="commentForm"
-        class="comment-form"
+      <div class="box">
+
+        <h3>跑操传说</h3>
+
+        <div class="mini">
+          风很大，队伍很长，
+          而终点依然遥远。
+        </div>
+
+      </div>
+
+
+      <div class="box">
+
+        <h3>猫猫守则</h3>
+
+        <div class="mini">
+
+          其一：可以吐槽事情，不要泄露隐私。<br>
+
+          其二：可以表达不满，不要威胁他人。<br>
+
+          其三：可以玩梗，不要把伤害当玩笑。<br>
+
+          其四：发现违规内容，请及时举报。
+
+        </div>
+
+      </div>
+
+
+      <div class="box">
+
+        <h3>关于本站</h3>
+
+        <div class="mini">
+          本站为匿名校园交流页面，
+          不代表学校官方立场。
+          内容由用户自行发布。
+        </div>
+
+      </div>
+
+    </aside>
+
+  </section>
+
+
+  <section class="rules">
+
+    <strong>使用说明：</strong>
+
+    请勿发布真实姓名、手机号、住址、账号密码等个人信息；
+    禁止威胁、骚扰、恶意造谣及违法内容。
+
+    本站目前采用匿名访客标识用于点赞与举报，
+    不用于公开展示。
+
+  </section>
+
+
+  <footer class="footer">
+    CAT TIMES · 海南中学校园匿名交流墙
+  </footer>
+
+</main>
+
+
+<nav
+  class="bottom-nav"
+  aria-label="底部导航"
+>
+
+  <button
+    class="nav-btn"
+    data-go="top"
+  >
+    <strong>⌂</strong>
+    首页
+  </button>
+
+
+  <button
+    class="nav-btn"
+    data-go="categories"
+  >
+    <strong>▤</strong>
+    板块
+  </button>
+
+
+  <button
+    class="nav-btn center"
+    data-go="compose"
+  >
+    <strong>＋</strong>
+    发布
+  </button>
+
+
+  <button
+    class="nav-btn"
+    id="hotNav"
+  >
+    <strong>★</strong>
+    热门
+  </button>
+
+
+  <button
+    class="nav-btn"
+    id="myNav"
+  >
+    <strong>○</strong>
+    我的
+  </button>
+
+</nav>
+
+
+<div
+  id="detailModal"
+  class="modal-backdrop"
+>
+
+  <div class="modal">
+
+    <div class="modal-head">
+
+      <h3 id="detailTitle">
+        帖子详情
+      </h3>
+
+      <button
+        class="close"
+        data-close="detailModal"
       >
+        ×
+      </button>
 
-        <textarea
-          id="commentContent"
-          required
-          maxlength="1000"
-          placeholder="写下你的评论……"
-        ></textarea>
+    </div>
 
-        <button
-          class="submit"
-          type="submit"
-        >
-          匿名评论
-        </button>
 
-      </form>
+    <div
+      id="detailMeta"
+      class="detail-meta"
+    ></div>
+
+
+    <div
+      id="detailBody"
+      class="detail-body"
+    ></div>
+
+
+    <div class="detail-actions">
+
+      <button
+        class="action"
+        id="detailLike"
+      >
+        ♡ 点赞
+      </button>
+
+      <button
+        class="action"
+        id="detailComment"
+      >
+        评论
+      </button>
+
+      <button
+        class="action"
+        id="detailReport"
+      >
+        举报
+      </button>
 
     </div>
 
   </div>
 
-
-  <div
-    id="reportModal"
-    class="modal-backdrop"
-  >
-
-    <div class="modal">
-
-      <div class="modal-head">
-
-        <h3>
-          举报帖子
-        </h3>
-
-        <button
-          class="close"
-          data-close="reportModal"
-        >
-          ×
-        </button>
-
-      </div>
+</div>
 
 
-      <form
-        id="reportForm"
-        class="comment-form"
+<div
+  id="commentModal"
+  class="modal-backdrop"
+>
+
+  <div class="modal">
+
+    <div class="modal-head">
+
+      <h3 id="commentTitle">
+        评论
+      </h3>
+
+      <button
+        class="close"
+        data-close="commentModal"
       >
-
-        <textarea
-          id="reportReason"
-          required
-          maxlength="500"
-          placeholder="请说明举报原因"
-        ></textarea>
-
-        <button
-          class="submit"
-          type="submit"
-        >
-          提交举报
-        </button>
-
-      </form>
+        ×
+      </button>
 
     </div>
 
+
+    <div
+      id="commentList"
+      class="comment-list"
+    ></div>
+
+
+    <form
+      id="commentForm"
+      class="comment-form"
+    >
+
+      <textarea
+        id="commentContent"
+        required
+        maxlength="1000"
+        placeholder="写下你的评论……"
+      ></textarea>
+
+      <button
+        class="submit"
+        type="submit"
+      >
+        匿名评论
+      </button>
+
+    </form>
+
   </div>
 
+</div>
 
-  <div
-    id="toast"
-    class="toast"
-  ></div>
+
+<div
+  id="reportModal"
+  class="modal-backdrop"
+>
+
+  <div class="modal">
+
+    <div class="modal-head">
+
+      <h3>
+        举报帖子
+      </h3>
+
+      <button
+        class="close"
+        data-close="reportModal"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <form
+      id="reportForm"
+      class="comment-form"
+    >
+
+      <textarea
+        id="reportReason"
+        required
+        maxlength="500"
+        placeholder="请说明举报原因"
+      ></textarea>
+
+      <button
+        class="submit"
+        type="submit"
+      >
+        提交举报
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<div
+  id="toast"
+  class="toast"
+></div>
 
 
 <script>
@@ -1082,6 +1307,15 @@ let searchText = "";
 let activePostId = null;
 
 
+let lastSubmitAt =
+  Number(
+    localStorage.getItem("hnxz_last_submit") || 0
+  );
+
+
+const MIN_POST_INTERVAL = 60000;
+
+
 let visitorId =
   localStorage.getItem("hnxz_visitor");
 
@@ -1089,129 +1323,7 @@ let visitorId =
 if(!visitorId){
 
   visitorId =
-    (
-      crypto.randomUUID
+    crypto.randomUUID
       ? crypto.randomUUID()
       : Date.now() +
-        "-" +
-        Math.random()
-          .toString(16)
-          .slice(2)
-    );
-
-  localStorage.setItem(
-    "hnxz_visitor",
-    visitorId
-  );
-
-}
-
-
-const $ =
-  s => document.querySelector(s);
-
-const $$ =
-  s => document.querySelectorAll(s);
-
-
-function escapeHTML(v){
-
-  return String(v ?? "")
-    .replace(
-      /[&<>"']/g,
-      c => ({
-        "&":"&amp;",
-        "<":"&lt;",
-        ">":"&gt;",
-        '"':"&quot;",
-        "'":"&#039;"
-      }[c])
-    );
-
-}
-
-
-function toast(msg){
-
-  const el = $("#toast");
-
-  el.textContent = msg;
-
-  el.classList.add("show");
-
-  clearTimeout(window.__toast);
-
-  window.__toast =
-    setTimeout(
-      () =>
-        el.classList.remove("show"),
-      2200
-    );
-
-}
-
-
-function formatDate(s){
-
-  const d = new Date(s);
-
-  return d.toLocaleString(
-    "zh-CN",
-    {
-      year:"numeric",
-      month:"2-digit",
-      day:"2-digit",
-      hour:"2-digit",
-      minute:"2-digit"
-    }
-  );
-
-}
-
-
-function scrollToId(id){
-
-  document
-    .getElementById(id)
-    ?.scrollIntoView({
-      behavior:"smooth",
-      block:"start"
-    });
-
-}
-
-
-$("#today").textContent =
-  new Date().toLocaleDateString(
-    "zh-CN",
-    {
-      year:"numeric",
-      month:"long",
-      day:"numeric"
-    }
-  );
-
-
-function renderCategories(){
-
-  $("#categories").innerHTML =
-    CATEGORIES
-      .map(
-        c =>
-          `<button
-             class="tab ${c === currentCategory ? "active" : ""}"
-             data-category="${escapeHTML(c)}"
-           >
-             ${escapeHTML(c)}
-           </button>`
-      )
-      .join("");
-
-
-  $("#category").innerHTML =
-    CATEGORIES
-      .filter(c => c !== "全部")
-      .map(
-        c =>
-          `<option>
-             ${escape
+   

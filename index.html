@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>海南中学吐槽墙</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif;
+  background:#f4f6fa;
+  color:#182033;
+}
+
+header{
+  background:linear-gradient(135deg,#17233d,#315efb);
+  color:white;
+  padding:55px 20px 45px;
+  text-align:center;
+}
+
+header h1{
+  margin:0;
+  font-size:36px;
+}
+
+header p{
+  margin:12px 0 0;
+  opacity:.9;
+}
+
+.container{
+  width:min(1000px,calc(100% - 30px));
+  margin:25px auto 50px;
+}
+
+.toolbar{
+  background:white;
+  padding:18px;
+  border-radius:18px;
+  box-shadow:0 6px 25px rgba(20,30,60,.08);
+  margin-bottom:20px;
+}
+
+.search{
+  width:100%;
+  padding:13px 15px;
+  border:1px solid #dfe4ee;
+  border-radius:12px;
+  font-size:15px;
+  outline:none;
+}
+
+.search:focus{
+  border-color:#315efb;
+}
+
+.tabs{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  margin-top:15px;
+  padding-bottom:4px;
+}
+
+.tabs button,
+.sort button{
+  border:0;
+  background:#eef1f7;
+  padding:9px 14px;
+  border-radius:10px;
+  white-space:nowrap;
+  cursor:pointer;
+}
+
+.tabs button.active,
+.sort button.active{
+  background:#315efb;
+  color:white;
+}
+
+.sort{
+  display:flex;
+  gap:8px;
+  margin-top:15px;
+}
+
+.card{
+  background:white;
+  border-radius:18px;
+  padding:22px;
+  margin-bottom:16px;
+  box-shadow:0 6px 22px rgba(20,30,60,.06);
+}
+
+.card h2{
+  margin:0 0 10px;
+  font-size:20px;
+}
+
+.meta{
+  color:#7b8496;
+  font-size:13px;
+  margin-bottom:15px;
+}
+
+.content{
+  line-height:1.75;
+  white-space:pre-wrap;
+  word-break:break-word;
+}
+
+.tag{
+  display:inline-block;
+  background:#edf2ff;
+  color:#315efb;
+  padding:4px 9px;
+  border-radius:8px;
+  font-size:12px;
+  margin-right:7px;
+}
+
+.actions{
+  display:flex;
+  gap:8px;
+  margin-top:18px;
+  flex-wrap:wrap;
+}
+
+.actions button{
+  border:0;
+  background:#f1f3f7;
+  padding:8px 12px;
+  border-radius:9px;
+  cursor:pointer;
+}
+
+.actions button:hover{
+  background:#e6eaf2;
+}
+
+.form{
+  background:white;
+  padding:24px;
+  border-radius:18px;
+  box-shadow:0 6px 22px rgba(20,30,60,.06);
+  margin-top:25px;
+}
+
+.form h2{
+  margin-top:0;
+}
+
+input,textarea,select{
+  width:100%;
+  border:1px solid #dfe4ee;
+  border-radius:10px;
+  padding:12px;
+  margin:7px 0 13px;
+  font:inherit;
+}
+
+textarea{
+  min-height:130px;
+  resize:vertical;
+}
+
+.primary{
+  background:#315efb;
+  color:white;
+  border:0;
+  border-radius:10px;
+  padding:12px 20px;
+  cursor:pointer;
+  font-size:15px;
+}
+
+.rules{
+  background:#fff8e8;
+  border:1px solid #ffe4a8;
+  border-radius:15px;
+  padding:18px;
+  margin-top:20px;
+  color:#6c531d;
+  line-height:1.7;
+}
+
+.empty{
+  text-align:center;
+  padding:50px 20px;
+  color:#8992a3;
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.5);
+  z-index:100;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  background:white;
+  width:min(650px,100%);
+  max-height:85vh;
+  overflow:auto;
+  border-radius:20px;
+  padding:24px;
+}
+
+.modal-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.close{
+  border:0;
+  background:#f0f2f6;
+  border-radius:9px;
+  padding:8px 12px;
+  cursor:pointer;
+}
+
+.comment{
+  background:#f6f7fa;
+  padding:13px;
+  border-radius:12px;
+  margin:10px 0;
+}
+
+.comment .name{
+  font-size:13px;
+  color:#6d7585;
+  margin-bottom:5px;
+}
+
+footer{
+  text-align:center;
+  color:#9299a8;
+  padding:30px 15px;
+  font-size:13px;
+}
+
+@media(max-width:600px){
+  header h1{
+    font-size:29px;
+  }
+
+  .container{
+    width:calc(100% - 20px);
+  }
+
+  .card,.form,.toolbar{
+    border-radius:14px;
+    padding:17px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>海南中学吐槽墙</h1>
+  <p>匿名分享校园生活、见闻与想说的话</p>
+</header>
+
+<main class="container">
+
+  <section class="toolbar">
+
+    <input
+      id="searchInput"
+      class="search"
+      placeholder="🔍 搜索吐槽内容……"
+    >
+
+    <div class="tabs" id="tabs"></div>
+
+    <div class="sort">
+      <button id="latestBtn" class="active" onclick="changeSort('latest')">
+        🕐 最新
+      </button>
+      <button id="hotBtn" onclick="changeSort('hot')">
+        🔥 最热
+      </button>
+    </div>
+
+  </section>
+
+  <section id="postList">
+    <div class="empty">正在加载吐槽……</div>
+  </section>
+
+  <section class="form">
+
+    <h2>✍️ 匿名发一条</h2>
+
+    <input id="nickname" maxlength="30" placeholder="昵称（可不填）">
+
+    <input id="title" maxlength="80" placeholder="标题">
+
+    <select id="category"></select>
+
+    <textarea
+      id="content"
+      maxlength="5000"
+      placeholder="想说什么？匿名写下来……"
+    ></textarea>
+
+    <button class="primary" onclick="submitPost()">
+      发布吐槽
+    </button>
+
+  </section>
+
+  <section class="rules">
+    <strong>📌 社区规则</strong><br>
+    可以吐槽学校生活、学习压力、食堂住宿、校园设施等。
+    请勿发布真实姓名、电话、住址等个人隐私；
+    请勿威胁、造谣、人身攻击或发布违法内容。
+    本网站为匿名交流平台，请对自己的发言负责。
+  </section>
+
+</main>
+
+<footer>
+  海南中学吐槽墙 · 匿名交流社区
+</footer>
+
+
+<!-- 评论弹窗 -->
+<div class="modal" id="commentModal">
+  <div class="modal-box">
+
+    <div class="modal-header">
+      <h2 id="commentTitle">评论</h2>
+      <button class="close" onclick="closeModal('commentModal')">关闭</button>
+    </div>
+
+    <div id="comments"></div>
+
+    <textarea
+      id="commentInput"
+      maxlength="1000"
+      placeholder="匿名留下评论……"
+    ></textarea>
+
+    <button class="primary" onclick="submitComment()">
+      发布评论
+    </button>
+
+  </div>
+</div>
+
+
+<!-- 举报弹窗 -->
+<div class="modal" id="reportModal">
+  <div class="modal-box">
+
+    <div class="modal-header">
+      <h2>举报内容</h2>
+      <button class="close" onclick="closeModal('reportModal')">关闭</button>
+    </div>
+
+    <p>请选择举报原因：</p>
+
+    <select id="reportReason">
+      <option value="隐私泄露">隐私泄露</option>
+      <option value="人身攻击">人身攻击</option>
+      <option value="骚扰或威胁">骚扰或威胁</option>
+      <option value="疑似虚假信息">疑似虚假信息</option>
+      <option value="其他">其他</option>
+    </select>
+
+    <button class="primary" onclick="submitReport()">
+      提交举报
+    </button>
+
+  </div>
+</div>
+
+
+<script>
+
+/* =========================
+   Supabase 配置
+========================= */
+
+const SUPABASE_URL =
+  "https://txaovuikygbeegaancxt.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable__pHD0KU1vXv1Daw5X3rOcg_5V2Ot3-y";
+
+const db = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+
+/* =========================
+   基础变量
+========================= */
+
+const categories = [
+  "全部",
+  "校园生活",
+  "学习压力",
+  "食堂住宿",
+  "老师教学",
+  "社团活动",
+  "校园设施",
+  "其他"
+];
+
+let posts = [];
+let reactions = [];
+let currentCategory = "全部";
+let sortMode = "latest";
+let currentPostId = null;
+
+
+/* =========================
+   匿名访客 ID
+========================= */
+
+let visitorId = localStorage.getItem("hnzx_visitor");
+
+if(!visitorId){
+
+  visitorId =
+    crypto.randomUUID();
+
+  localStorage.setItem(
+    "hnzx_visitor",
+    visitorId
+  );
+
+}
+
+
+/* =========================
+   防 XSS
+========================= */
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================
+   初始化分类
+========================= */
+
+function initCategories(){
+
+  const tabs =
+    document.getElementById("tabs");
+
+  const category =
+    document.getElementById("category");
+
+  tabs.innerHTML = "";
+
+  categories.forEach((cat,index)=>{
+
+    const button =
+      document.createElement("button");
+
+    button.textContent = cat;
+
+    if(index === 0){
+      button.classList.add("active");
+    }
+
+    button.onclick = ()=>{
+
+      currentCategory = cat;
+
+      document
+        .querySelectorAll(".tabs button")
+        .forEach(b=>b.classList.remove("active"));
+
+      button.classList.add("active");
+
+      renderPosts();
+
+    };
+
+    tabs.appendChild(button);
+
+  });
+
+
+  category.innerHTML =
+    categories
+      .filter(x=>x !== "全部")
+      .map(x=>`<option value="${escapeHTML(x)}">${escapeHTML(x)}</option>`)
+      .join("");
+
+}
+
+
+/* =========================
+   加载数据
+========================= */
+
+async function loadData(){
+
+  const postResult =
+    await db
+      .from("posts")
+      .select("*")
+      .eq("status","published")
+      .order("created_at",{ascending:false})
+      .limit(200);
+
+
+  if(postResult.error){
+
+    console.error(postResult.error);
+
+    document.getElementById("postList").innerHTML =
+      `<div class="empty">
+        加载失败，请刷新页面重试。
+      </div>`;
+
+    return;
+
+  }
+
+
+  posts = postResult.data || [];
+
+
+  const reactionResult =
+    await db
+      .from("reactions")
+      .select("post_id,visitor_id,type")
+      .eq("type","like");
+
+
+  if(!reactionResult.error){
+
+    reactions =
+      reactionResult.data || [];
+
+  }
+
+
+  renderPosts();
+
+}
+
+
+/* =========================
+   获取点赞数
+========================= */
+
+function likeCount(postId){
+
+  return reactions.filter(
+    r => r.post_id === postId
+  ).length;
+
+}
+
+
+/* =========================
+   是否已经点赞
+========================= */
+
+function alreadyLiked(postId){
+
+  return reactions.some(
+    r =>
+      r.post_id === postId &&
+      r.visitor_id === visitorId
+  );
+
+}
+
+
+/* =========================
+   渲染帖子
+========================= */
+
+function renderPosts(){
+
+  const list =
+    document.getElementById("postList");
+
+  const keyword =
+    document
+      .getElementById("searchInput")
+      .value
+      .trim()
+      .toLowerCase();
+
+
+  let result =
+    [...posts];
+
+
+  if(currentCategory !== "全部"){
+
+    result =
+      result.filter(
+        p => p.category === currentCategory
+      );
+
+  }
+
+
+  if(keyword){
+
+    result =
+      result.filter(p =>
+        String(p.title || "")
+          .toLowerCase()
+          .includes(keyword)
+        ||
+        String(p.content || "")
+          .toLowerCase()
+          .includes(keyword)
+        ||
+        String(p.category || "")
+          .toLowerCase()
+          .includes(keyword)
+      );
+
+  }
+
+
+  if(sortMode === "hot"){
+
+    result.sort(
+      (a,b)=>
+        likeCount(b.id)-likeCount(a.id)
+    );
+
+  }else{
+
+    result.sort(
+      (a,b)=>
+        new Date(b.created_at) -
+        new Date(a.created_at)
+    );
+
+  }
+
+
+  if(result.length === 0){
+
+    list.innerHTML =
+      `<div class="empty">
+        暂时没有找到相关内容。
+      </div>`;
+
+    return;
+
+  }
+
+
+  list.innerHTML =
+    result.map(post=>{
+
+      const likes =
+        likeCount(post.id);
+
+      const liked =
+        alreadyLiked(post.id);
+
+      const time =
+        new Date(post.created_at)
+          .toLocaleString("zh-CN");
+
+
+      return `
+
+      <article class="card">
+
+        <h2>
+          ${escapeHTML(post.title || "无标题")}
+        </h2>
+
+        <div class="meta">
+
+          <span class="tag">
+            ${escapeHTML(post.category || "其他")}
+          </span>
+
+          匿名用户 · ${time}
+
+        </div>
+
+        <div class="content">
+          ${escapeHTML(post.content)}
+        </div>
+
+        <div class="actions">
+
+          <button
+            onclick="likePost('${post.id}')"
+          >
+            ${liked ? "❤️" : "🤍"}
+            ${likes}
+          </button>
+
+          <button
+            onclick="openComments('${post.id}')"
+          >
+            💬 评论
+          </button>
+
+          <button
+            onclick="openReport('${post.id}')"
+          >
+            🚩 举报
+          </button>
+
+        </div>
+
+      </article>
+
+      `;
+
+    }).join("");
+
+}
+
+
+/* =========================
+   搜索
+========================= */
+
+document
+  .getElementById("searchInput")
+  .addEventListener(
+    "input",
+    renderPosts
+  );
+
+
+/* =========================
+   排序
+========================= */
+
+function changeSort(mode){
+
+  sortMode = mode;
+
+  document
+    .getElementById("latestBtn")
+    .classList.toggle(
+      "active",
+      mode === "latest"
+    );
+
+  document
+    .getElementById("hotBtn")
+    .classList.toggle(
+      "active",
+      mode === "hot"
+    );
+
+  renderPosts();
+
+}
+
+
+/* =========================
+   发布帖子
+========================= */
+
+async function submitPost(){
+
+  const nickname =
+    document
+      .getElementById("nickname")
+      .value
+      .trim() || "匿名用户";
+
+  const title =
+    document
+      .getElementById("title")
+      .value
+      .trim();
+
+  const category =
+    document
+      .getElementById("category")
+      .value;
+
+  const content =
+    document
+      .getElementById("content")
+      .value
+      .trim();
+
+
+  if(!title){
+
+    alert("请输入标题。");
+    return;
+
+  }
+
+
+  if(!content){
+
+    alert("请输入内容。");
+    return;
+
+  }
+
+
+  const result =
+    await db
+      .from("posts")
+      .insert({
+
+        nickname,
+        title,
+        category,
+        content,
+        status:"published"
+
+      })
+      .select()
+      .single();
+
+
+  if(result.error){
+
+    console.error(result.error);
+
+    alert(
+      "发布失败：" +
+      result.error.message
+    );
+
+    return;
+
+  }
+
+
+  document
+    .getElementById("nickname")
+    .value = "";
+
+  document
+    .getElementById("title")
+    .value = "";
+
+  document
+    .getElementById("content")
+    .value = "";
+
+
+  alert("发布成功！");
+
+  await loadData();
+
+}
+
+
+/* =========================
+   点赞
+========================= */
+
+async function likePost(postId){
+
+  if(alreadyLiked(postId)){
+
+    alert("你已经点过赞了。");
+    return;
+
+  }
+
+
+  const result =
+    await db
+      .from("reactions")
+      .insert({
+
+        post_id:postId,
+        visitor_id:visitorId,
+        type:"like"
+
+      });
+
+
+  if(result.error){
+
+    alert(
+      "点赞失败：" +
+      result.error.message
+    );
+
+    return;
+
+  }
+
+
+  await loadData();
+
+}
+
+
+/* =========================
+   评论
+========================= */
+
+async function openComments(postId){
+
+  currentPostId = postId;
+
+  const post =
+    posts.find(p=>p.id===postId);
+
+  document
+    .getElementById("commentTitle")
+    .textContent =
+      "评论 · " +
+      (post?.title || "");
+
+
+  document
+    .getElementById("commentModal")
+    .classList.add("show");
+
+
+  await loadComments();
+
+}
+
+
+async function loadComments(){
+
+  const box =
+    document.getElementById("comments");
+
+  box.innerHTML =
+    "<p>正在加载评论……</p>";
+
+
+  const result =
+    await db
+      .from("comments")
+      .select("*")
+      .eq("post_id",currentPostId)
+      .eq("status","published")
+      .order("created_at",{ascending:true});
+
+
+  if(result.error){
+
+    box.innerHTML =
+      "<p>评论加载失败。</p>";
+
+    return;
+
+  }
+
+
+  const comments =
+    result.data || [];
+
+
+  if(comments.length === 0){
+
+    box.innerHTML =
+      "<p>还没有评论，来留下第一条吧。</p>";
+
+    return;
+
+  }
+
+
+  box.innerHTML =
+    comments.map(c=>`
+
+      <div class="comment">
+
+        <div class="name">
+          ${escapeHTML(c.nickname || "匿名用户")}
+          ·
+          ${new Date(c.created_at)
+            .toLocaleString("zh-CN")}
+        </div>
+
+        <div>
+          ${escapeHTML(c.content)}
+        </div>
+
+      </div>
+
+    `).join("");
+
+}
+
+
+async function submitComment(){
+
+  const input =
+    document.getElementById("commentInput");
+
+  const content =
+    input.value.trim();
+
+
+  if(!content){
+
+    alert("请输入评论。");
+    return;
+
+  }
+
+
+  const result =
+    await db
+      .from("comments")
+      .insert({
+
+        post_id:currentPostId,
+        nickname:"匿名用户",
+        content,
+        status:"published"
+
+      });
+
+
+  if(result.error){
+
+    alert(
+      "评论失败：" +
+      result.error.message
+    );
+
+    return;
+
+  }
+
+
+  input.value = "";
+
+  await loadComments();
+
+}
+
+
+/* =========================
+   举报
+========================= */
+
+function openReport(postId){
+
+  currentPostId = postId;
+
+  document
+    .getElementById("reportModal")
+    .classList.add("show");
+
+}
+
+
+async function submitReport(){
+
+  const reason =
+    document
+      .getElementById("reportReason")
+      .value;
+
+
+  const result =
+    await db
+      .from("reports")
+      .insert({
+
+        post_id:currentPostId,
+        reason,
+        visitor_id:visitorId
+
+      });
+
+
+  if(result.error){
+
+    alert(
+      "举报失败：" +
+      result.error.message
+    );
+
+    return;
+
+  }
+
+
+  closeModal("reportModal");
+
+  alert("举报已提交，感谢反馈。");
+
+}
+
+
+/* =========================
+   关闭弹窗
+========================= */
+
+function closeModal(id){
+
+  document
+    .getElementById(id)
+    .classList.remove("show");
+
+}
+
+
+/* =========================
+   点击背景关闭
+========================= */
+
+document
+  .querySelectorAll(".modal")
+  .forEach(modal=>{
+
+    modal.addEventListener(
+      "click",
+      e=>{
+
+        if(e.target === modal){
+
+          modal.classList.remove("show");
+
+        }
+
+      }
+    );
+
+  });
+
+
+/* =========================
+   启动
+========================= */
+
+initCategories();
+
+loadData();
+
+</script>
+
+</body>
+</html>

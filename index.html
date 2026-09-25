@@ -2,31 +2,38 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <title>CAT TIMES｜海南中学校园报</title>
+  <meta
+    name="viewport"
+    content="width=device-width,initial-scale=1,viewport-fit=cover"
+  >
 
   <meta
     name="description"
     content="CAT TIMES｜海南中学校园匿名交流墙"
   >
 
-  <meta name="theme-color" content="#f5f1e8">
+  <title>CAT TIMES｜海南中学校园报</title>
 
   <style>
-    * {
-      box-sizing: border-box;
+    :root {
+      --ink: #151515;
+      --muted: #777;
+      --paper: #f7f4ec;
+      --paper2: #fffdf7;
+      --line: #1d1d1d;
+      --soft-line: #d6d0c2;
+      --red: #a71919;
+      --blue: #234d70;
+      --green: #28734b;
+      --yellow: #e8c85a;
+      --danger: #b52a2a;
+      --shadow: 0 8px 24px rgba(0,0,0,.08);
+      --radius: 8px;
     }
 
-    :root {
-      --paper: #f5f1e8;
-      --paper-dark: #e9e2d3;
-      --ink: #161616;
-      --muted: #666;
-      --line: #171717;
-      --red: #a32121;
-      --white: #fffdf8;
-      --shadow: 0 4px 0 rgba(0,0,0,.12);
+    * {
+      box-sizing: border-box;
     }
 
     html {
@@ -37,17 +44,17 @@
       margin: 0;
       background:
         radial-gradient(
-          rgba(0,0,0,.035) 1px,
+          rgba(0,0,0,.025) 1px,
           transparent 1px
-        ),
+        ) 0 0 / 5px 5px,
         var(--paper);
-      background-size: 7px 7px;
       color: var(--ink);
       font-family:
         Georgia,
         "Times New Roman",
         "Noto Serif SC",
         "Songti SC",
+        SimSun,
         serif;
     }
 
@@ -66,185 +73,137 @@
       color: inherit;
     }
 
-    .container {
-      width: min(1180px, calc(100% - 32px));
-      margin: auto;
+    .page {
+      width: min(1180px, calc(100% - 28px));
+      margin: 0 auto;
     }
 
     /* =========================
        HEADER
     ========================= */
 
-    .topbar {
-      border-bottom: 3px solid var(--line);
-      padding: 10px 0;
-      font-family:
-        Arial,
-        "Microsoft YaHei",
-        sans-serif;
-      font-size: 12px;
-      display: flex;
-      justify-content: space-between;
-      gap: 15px;
+    header {
+      border-bottom: 4px double var(--line);
+      padding: 18px 0 12px;
     }
 
     .masthead {
-      text-align: center;
-      padding: 24px 0 15px;
-      border-bottom: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: end;
+      gap: 20px;
+    }
+
+    .masthead-side {
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      line-height: 1.6;
+      color: #555;
+    }
+
+    .masthead-side.right {
+      text-align: right;
     }
 
     .brand {
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .brand h1 {
       margin: 0;
-      font-size: clamp(46px, 9vw, 100px);
-      line-height: .82;
-      letter-spacing: -5px;
+      font-size: clamp(42px, 8vw, 76px);
+      letter-spacing: -3px;
+      line-height: .85;
       font-weight: 900;
     }
 
-    .subtitle {
-      margin-top: 12px;
-      font-size: 13px;
+    .brand-sub {
+      margin-top: 9px;
+      font-family: Arial, sans-serif;
+      font-size: 11px;
       letter-spacing: 4px;
-      font-family:
-        Arial,
-        "Microsoft YaHei",
-        sans-serif;
+      color: #555;
     }
 
-    .date-line {
-      margin-top: 10px;
-      font-size: 12px;
-      font-family:
-        Arial,
-        "Microsoft YaHei",
-        sans-serif;
-      color: var(--muted);
-    }
-
-    .nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      border-bottom: 3px solid var(--line);
-      font-family:
-        Arial,
-        "Microsoft YaHei",
-        sans-serif;
-    }
-
-    .nav button {
-      border: 0;
-      background: transparent;
-      padding: 11px 18px;
-      font-weight: 700;
-    }
-
-    .nav button:hover {
-      background: var(--ink);
-      color: var(--white);
+    .top-rule {
+      margin-top: 12px;
+      border-top: 1px solid var(--line);
     }
 
     /* =========================
        STATUS
     ========================= */
 
-    .status {
-      margin: 16px 0;
-      padding: 10px 14px;
-      border: 1px solid var(--line);
+    .statusbar {
+      margin: 12px 0;
+      padding: 9px 12px;
+      border: 1px solid var(--soft-line);
       background: rgba(255,255,255,.45);
       display: flex;
       justify-content: space-between;
+      gap: 10px;
       align-items: center;
-      gap: 15px;
-      font-family:
-        Arial,
-        "Microsoft YaHei",
-        sans-serif;
-      font-size: 13px;
+      font-family: Arial, sans-serif;
+      font-size: 12px;
     }
 
-    .status-left {
+    .status {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 7px;
     }
 
     .status-dot {
-      width: 9px;
-      height: 9px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
-      background: #888;
+      background: #aaa;
       display: inline-block;
     }
 
     .status-dot.online {
-      background: #238636;
+      background: #2e9d5b;
     }
 
     .status-dot.offline {
-      background: var(--red);
+      background: #d58b23;
+    }
+
+    .status-dot.error {
+      background: #c83a3a;
     }
 
     /* =========================
-       HERO
+       NAV
     ========================= */
 
-    .hero {
-      display: grid;
-      grid-template-columns: 1.7fr .9fr;
-      gap: 20px;
-      border-bottom: 3px solid var(--line);
-      padding-bottom: 22px;
-      margin-bottom: 22px;
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 18px;
     }
 
-    .hero-main {
+    .nav button {
+      border: 0;
       border-right: 1px solid var(--line);
-      padding-right: 20px;
-    }
-
-    .kicker {
-      font-family:
-        Arial,
-        "Microsoft YaHei",
-        sans-serif;
-      font-weight: 800;
+      background: transparent;
+      padding: 9px 15px;
       font-size: 13px;
-      letter-spacing: 2px;
-      margin-bottom: 8px;
+      font-weight: 700;
     }
 
-    .hero-title {
-      font-size: clamp(34px, 6vw, 70px);
-      line-height: .95;
-      margin: 0;
-      font-weight: 900;
+    .nav button:first-child {
+      border-left: 1px solid var(--line);
     }
 
-    .hero-description {
-      font-size: 17px;
-      line-height: 1.7;
-      max-width: 800px;
-      margin: 18px 0 0;
-    }
-
-    .hero-side {
-      padding: 5px 0;
-    }
-
-    .side-title {
-      font-size: 26px;
-      margin: 0 0 12px;
-      border-bottom: 2px solid var(--line);
-      padding-bottom: 8px;
-    }
-
-    .side-list {
-      margin: 0;
-      padding-left: 22px;
-      line-height: 1.9;
+    .nav button:hover,
+    .nav button.active {
+      background: var(--ink);
+      color: white;
     }
 
     /* =========================
@@ -253,160 +212,229 @@
 
     .controls {
       display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 12px;
-      margin-bottom: 18px;
+      grid-template-columns: 1fr auto auto;
+      gap: 10px;
+      margin-bottom: 16px;
     }
 
     .search {
-      display: flex;
+      min-width: 0;
     }
 
-    .search input {
+    input,
+    textarea,
+    select {
       width: 100%;
-      border: 2px solid var(--line);
-      background: var(--white);
-      padding: 12px;
+      border: 1px solid #aaa;
+      background: rgba(255,255,255,.75);
+      color: var(--ink);
+      padding: 11px 12px;
       outline: none;
+      border-radius: 4px;
     }
 
-    .sort {
-      border: 2px solid var(--line);
-      background: var(--white);
-      padding: 0 12px;
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--ink);
+      box-shadow: 0 0 0 2px rgba(0,0,0,.06);
+    }
+
+    .btn {
+      border: 1px solid var(--line);
+      background: var(--ink);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 4px;
       font-weight: 700;
     }
 
-    .categories {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 22px;
+    .btn:hover {
+      opacity: .86;
     }
 
-    .category-btn {
-      border: 1px solid var(--line);
+    .btn.light {
       background: transparent;
-      padding: 7px 12px;
-      font-family:
-        Arial,
-        "Microsoft YaHei",
-        sans-serif;
-      font-size: 13px;
+      color: var(--ink);
     }
 
-    .category-btn.active,
-    .category-btn:hover {
-      background: var(--ink);
-      color: var(--white);
+    .btn.red {
+      background: var(--red);
+      border-color: var(--red);
     }
 
     /* =========================
-       POSTS
+       HERO
     ========================= */
 
-    .section-heading {
+    .hero {
+      display: grid;
+      grid-template-columns: 1.6fr .8fr;
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+
+    .hero-main {
+      border: 2px solid var(--line);
+      background: var(--paper2);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-label {
+      display: inline-block;
+      background: var(--red);
+      color: white;
+      padding: 5px 8px;
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .hero h2 {
+      margin: 0 0 10px;
+      font-size: clamp(28px, 5vw, 48px);
+      line-height: 1.05;
+    }
+
+    .hero p {
+      margin: 0;
+      color: #444;
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    .hero-side {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.5);
+      padding: 17px;
+    }
+
+    .hero-side h3 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 8px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .stat {
+      border: 1px solid #bbb;
+      padding: 12px;
+      background: rgba(255,255,255,.55);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 24px;
+    }
+
+    .stat span {
+      font-family: Arial, sans-serif;
+      color: #777;
+      font-size: 11px;
+    }
+
+    /* =========================
+       SECTION
+    ========================= */
+
+    .section-title {
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
+      align-items: center;
+      gap: 15px;
       border-top: 3px solid var(--line);
       border-bottom: 1px solid var(--line);
-      padding: 10px 0;
-      margin-bottom: 15px;
+      padding: 9px 0;
+      margin: 20px 0 15px;
     }
 
-    .section-heading h2 {
+    .section-title h2 {
       margin: 0;
-      font-size: 25px;
+      font-size: 24px;
     }
 
-    .section-heading span {
-      font-family:
-        Arial,
-        "Microsoft YaHei",
-        sans-serif;
+    .section-title span {
+      font-family: Arial, sans-serif;
+      color: #777;
       font-size: 12px;
-      color: var(--muted);
     }
+
+    /* =========================
+       POSTS GRID
+    ========================= */
 
     .posts {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
+      gap: 16px;
     }
 
     .post {
-      background: var(--white);
+      background: var(--paper2);
       border: 1px solid var(--line);
-      padding: 18px;
-      box-shadow: var(--shadow);
+      padding: 17px;
       position: relative;
-      transition: transform .15s ease;
-    }
-
-    .post:hover {
-      transform: translateY(-2px);
+      box-shadow: 3px 3px 0 rgba(0,0,0,.08);
     }
 
     .post.featured {
-      grid-column: span 2;
+      border-width: 2px;
     }
 
     .post-meta {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 8px;
-      font-family:
-        Arial,
-        "Microsoft YaHei",
-        sans-serif;
+      gap: 7px;
+      font-family: Arial, sans-serif;
       font-size: 11px;
-      color: var(--muted);
-      margin-bottom: 10px;
+      color: #666;
+      margin-bottom: 9px;
     }
 
     .tag {
-      border: 1px solid var(--line);
-      padding: 3px 7px;
-      color: var(--ink);
+      display: inline-block;
+      padding: 3px 6px;
+      background: #eee8da;
+      color: #333;
+      border: 1px solid #c9c0af;
       font-weight: 700;
     }
 
-    .local-tag {
-      background: #eee;
-    }
-
-    .post-title {
-      margin: 0 0 10px;
-      font-size: 26px;
-      line-height: 1.15;
-    }
-
-    .featured .post-title {
-      font-size: 34px;
+    .post h3 {
+      margin: 0 0 9px;
+      font-size: 24px;
+      line-height: 1.25;
     }
 
     .post-content {
-      font-size: 15px;
-      line-height: 1.75;
+      color: #333;
+      line-height: 1.8;
       white-space: pre-wrap;
-      overflow-wrap: anywhere;
+      word-break: break-word;
+      font-size: 14px;
     }
 
     .post-footer {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 10px;
-      margin-top: 16px;
-      padding-top: 10px;
-      border-top: 1px dotted #777;
-      font-family:
-        Arial,
-        "Microsoft YaHei",
-        sans-serif;
-      font-size: 12px;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+      padding-top: 11px;
+      border-top: 1px dashed #bbb;
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      color: #777;
     }
 
     .actions {
@@ -415,28 +443,219 @@
       flex-wrap: wrap;
     }
 
-    .action-btn {
-      border: 1px solid var(--line);
+    .action {
+      border: 1px solid #aaa;
       background: transparent;
-      padding: 6px 9px;
+      color: #333;
+      border-radius: 3px;
+      padding: 5px 8px;
+      font-size: 11px;
+    }
+
+    .action:hover {
+      background: #eee;
+    }
+
+    .action.liked {
+      background: var(--red);
+      color: white;
+      border-color: var(--red);
+    }
+
+    /* =========================
+       COMMENTS
+    ========================= */
+
+    .comments {
+      margin-top: 13px;
+      border-top: 1px solid #ddd;
+      padding-top: 11px;
+    }
+
+    .comments-title {
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .comment {
+      border-left: 3px solid #ccc;
+      padding: 7px 9px;
+      margin-bottom: 7px;
+      background: #faf8f2;
+    }
+
+    .comment-meta {
+      font-family: Arial, sans-serif;
+      font-size: 10px;
+      color: #777;
+      margin-bottom: 4px;
+    }
+
+    .comment-body {
+      font-size: 13px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .comment-form {
+      display: flex;
+      gap: 7px;
+      margin-top: 9px;
+    }
+
+    .comment-form input {
+      flex: 1;
+      min-width: 0;
+      padding: 8px 9px;
+    }
+
+    .comment-form button {
+      padding: 8px 11px;
+      border: 1px solid var(--line);
+      background: var(--ink);
+      color: white;
+      border-radius: 3px;
       font-size: 12px;
     }
 
-    .action-btn:hover {
-      background: var(--ink);
-      color: var(--white);
-    }
+    /* =========================
+       EMPTY / LOADING
+    ========================= */
 
     .empty {
-      border: 2px dashed #777;
-      padding: 45px 20px;
+      border: 1px dashed #aaa;
+      padding: 35px 15px;
       text-align: center;
-      font-family:
-        Arial,
-        "Microsoft YaHei",
-        sans-serif;
-      color: var(--muted);
+      color: #777;
+      background: rgba(255,255,255,.35);
       grid-column: 1 / -1;
+    }
+
+    .loading {
+      border: 1px dashed #aaa;
+      padding: 35px;
+      text-align: center;
+      color: #777;
+      grid-column: 1 / -1;
+    }
+
+    /* =========================
+       MODAL
+    ========================= */
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      background: rgba(0,0,0,.58);
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-card {
+      width: min(650px, 100%);
+      max-height: 92vh;
+      overflow-y: auto;
+      background: var(--paper2);
+      border: 2px solid var(--line);
+      box-shadow: 10px 10px 0 rgba(0,0,0,.25);
+      padding: 20px;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
+
+    .modal-header h2 {
+      margin: 0;
+    }
+
+    .close {
+      border: 0;
+      background: transparent;
+      font-size: 25px;
+      line-height: 1;
+    }
+
+    .form-group {
+      margin-bottom: 13px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    textarea {
+      min-height: 170px;
+      resize: vertical;
+      line-height: 1.7;
+    }
+
+    .form-note {
+      padding: 9px;
+      background: #f2eee3;
+      border-left: 3px solid var(--red);
+      font-size: 11px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 13px;
+    }
+
+    .form-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .counter {
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      color: #777;
+    }
+
+    /* =========================
+       TOAST
+    ========================= */
+
+    .toast {
+      position: fixed;
+      z-index: 2000;
+      left: 50%;
+      bottom: 25px;
+      transform: translate(-50%, 30px);
+      opacity: 0;
+      pointer-events: none;
+      background: #111;
+      color: white;
+      padding: 11px 16px;
+      border-radius: 4px;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      transition: .25s ease;
+      max-width: calc(100% - 30px);
+      text-align: center;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
     }
 
     /* =========================
@@ -444,243 +663,14 @@
     ========================= */
 
     footer {
-      margin-top: 40px;
-      border-top: 4px solid var(--line);
-      padding: 20px 0 35px;
-      font-family:
-        Arial,
-        "Microsoft YaHei",
-        sans-serif;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 20px;
-    }
-
-    .footer-title {
-      font-family: Georgia, serif;
-      font-size: 20px;
-      color: var(--ink);
-      margin-bottom: 8px;
-    }
-
-    /* =========================
-       FAB
-    ========================= */
-
-    .fab {
-      position: fixed;
-      right: 24px;
-      bottom: 24px;
-      z-index: 20;
-      width: 62px;
-      height: 62px;
-      border-radius: 50%;
-      border: 3px solid var(--ink);
-      background: var(--red);
-      color: white;
-      font-size: 30px;
-      box-shadow: 4px 4px 0 var(--ink);
-    }
-
-    .fab:hover {
-      transform: translate(2px, 2px);
-      box-shadow: 2px 2px 0 var(--ink);
-    }
-
-    /* =========================
-       MODAL
-    ========================= */
-
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.65);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 18px;
-      z-index: 100;
-    }
-
-    .modal-backdrop.show {
-      display: flex;
-    }
-
-    .modal {
-      width: min(650px, 100%);
-      max-height: 90vh;
-      overflow: auto;
-      background: var(--paper);
-      border: 3px solid var(--ink);
-      box-shadow: 8px 8px 0 rgba(0,0,0,.35);
-    }
-
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 14px 18px;
-      border-bottom: 2px solid var(--ink);
-    }
-
-    .modal-header h3 {
-      margin: 0;
-      font-size: 25px;
-    }
-
-    .close {
-      border: 0;
-      background: transparent;
-      font-size: 30px;
-      line-height: 1;
-    }
-
-    .modal-body {
-      padding: 18px;
-    }
-
-    .form-group {
-      margin-bottom: 15px;
-    }
-
-    .form-group label {
-      display: block;
-      font-weight: 800;
-      margin-bottom: 6px;
-      font-family:
-        Arial,
-        "Microsoft YaHei",
-        sans-serif;
-      font-size: 13px;
-    }
-
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
-      width: 100%;
-      border: 2px solid var(--ink);
-      background: var(--white);
-      padding: 11px;
-      outline: none;
-    }
-
-    .form-group textarea {
-      min-height: 170px;
-      resize: vertical;
-    }
-
-    .form-help {
-      margin-top: 5px;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.5;
-      font-family:
-        Arial,
-        "Microsoft YaHei",
-        sans-serif;
-    }
-
-    .form-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 10px;
-      margin-top: 18px;
-    }
-
-    .primary-btn,
-    .secondary-btn {
-      border: 2px solid var(--ink);
-      padding: 10px 18px;
-      font-weight: 800;
-    }
-
-    .primary-btn {
-      background: var(--ink);
-      color: white;
-    }
-
-    .secondary-btn {
-      background: transparent;
-    }
-
-    .primary-btn:disabled {
-      opacity: .5;
-      cursor: not-allowed;
-    }
-
-    /* =========================
-       COMMENTS
-    ========================= */
-
-    .comment-list {
-      margin-top: 15px;
-    }
-
-    .comment {
-      border-top: 1px dotted #777;
-      padding: 12px 0;
-    }
-
-    .comment-meta {
-      font-family:
-        Arial,
-        "Microsoft YaHei",
-        sans-serif;
-      font-size: 11px;
-      color: var(--muted);
-      margin-bottom: 5px;
-    }
-
-    .comment-content {
-      white-space: pre-wrap;
-      line-height: 1.6;
-    }
-
-    /* =========================
-       TOAST
-    ========================= */
-
-    .toast-container {
-      position: fixed;
-      right: 20px;
-      top: 20px;
-      z-index: 300;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      width: min(360px, calc(100% - 40px));
-    }
-
-    .toast {
-      border: 2px solid var(--ink);
-      background: var(--white);
-      padding: 12px 14px;
-      box-shadow: 4px 4px 0 var(--ink);
-      font-family:
-        Arial,
-        "Microsoft YaHei",
-        sans-serif;
-      font-size: 13px;
-    }
-
-    /* =========================
-       LOADING
-    ========================= */
-
-    .loading {
+      border-top: 4px double var(--line);
+      margin-top: 35px;
+      padding: 18px 0 35px;
       text-align: center;
-      padding: 35px;
-      font-family:
-        Arial,
-        "Microsoft YaHei",
-        sans-serif;
-      color: var(--muted);
-      grid-column: 1 / -1;
+      color: #777;
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      line-height: 1.8;
     }
 
     /* =========================
@@ -688,70 +678,83 @@
     ========================= */
 
     @media (max-width: 800px) {
-      .hero {
+      .masthead {
         grid-template-columns: 1fr;
+        gap: 5px;
       }
 
-      .hero-main {
-        border-right: 0;
-        padding-right: 0;
+      .masthead-side,
+      .masthead-side.right {
+        text-align: center;
+      }
+
+      .masthead-side {
+        display: none;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
       }
 
       .posts {
         grid-template-columns: 1fr;
       }
 
-      .post.featured {
-        grid-column: span 1;
+      .controls {
+        grid-template-columns: 1fr 1fr;
       }
 
-      .featured .post-title {
-        font-size: 28px;
+      .search {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .page {
+        width: min(100% - 16px, 1180px);
+      }
+
+      header {
+        padding-top: 13px;
+      }
+
+      .brand h1 {
+        font-size: 47px;
+      }
+
+      .nav {
+        justify-content: flex-start;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+      }
+
+      .nav button {
+        flex: 0 0 auto;
+        white-space: nowrap;
       }
 
       .controls {
         grid-template-columns: 1fr;
       }
 
-      .sort {
-        min-height: 44px;
+      .search {
+        grid-column: auto;
       }
 
-      .footer-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 520px) {
-      .container {
-        width: min(100% - 20px, 1180px);
+      .post h3 {
+        font-size: 21px;
       }
 
-      .topbar {
-        font-size: 10px;
+      .hero-main {
+        padding: 17px;
       }
 
-      .brand {
-        font-size: 54px;
-        letter-spacing: -3px;
+      .modal {
+        padding: 8px;
       }
 
-      .subtitle {
-        letter-spacing: 2px;
-        font-size: 11px;
-      }
-
-      .hero-title {
-        font-size: 38px;
-      }
-
-      .post {
-        padding: 14px;
-      }
-
-      .fab {
-        right: 15px;
-        bottom: 15px;
+      .modal-card {
+        padding: 15px;
       }
     }
   </style>
@@ -759,175 +762,183 @@
 
 <body>
 
+<div class="page">
+
   <!-- =========================
        HEADER
   ========================== -->
 
   <header>
-    <div class="container">
 
-      <div class="topbar">
-        <span>HNZX CAMPUS COMMUNITY</span>
-        <span>CAT TIMES / 校园匿名交流墙</span>
+    <div class="masthead">
+
+      <div class="masthead-side">
+        HAINAN MIDDLE SCHOOL<br>
+        CAMPUS COMMUNITY
       </div>
 
-      <div class="masthead">
-        <h1 class="brand">CAT TIMES</h1>
-
-        <div class="subtitle">
+      <div class="brand">
+        <h1>CAT TIMES</h1>
+        <div class="brand-sub">
           海南中学校园匿名交流墙
         </div>
-
-        <div class="date-line" id="todayDate">
-          Loading date...
-        </div>
       </div>
 
-      <nav class="nav">
-        <button onclick="scrollToPosts()">最新帖子</button>
-        <button onclick="setSort('hot')">热门</button>
-        <button onclick="setSort('latest')">最新</button>
-        <button onclick="openPostModal()">我要投稿</button>
-      </nav>
+      <div class="masthead-side right">
+        VOL. 01<br>
+        EST. 2026
+      </div>
 
     </div>
+
+    <div class="top-rule"></div>
+
   </header>
 
 
-  <main class="container">
+  <!-- =========================
+       STATUS
+  ========================== -->
 
-    <!-- =========================
-         DATABASE STATUS
-    ========================== -->
+  <div class="statusbar">
 
     <div class="status">
-      <div class="status-left">
-        <span
-          id="statusDot"
-          class="status-dot"
-        ></span>
+      <span
+        id="statusDot"
+        class="status-dot"
+      ></span>
 
-        <span id="statusText">
-          正在连接数据库...
-        </span>
-      </div>
-
-      <span id="statusDetail">
-        HNZX / CAT TIMES
+      <span id="statusText">
+        正在初始化……
       </span>
     </div>
 
+    <div id="dateText"></div>
 
-    <!-- =========================
-         HERO
-    ========================== -->
-
-    <section class="hero">
-
-      <div class="hero-main">
-
-        <div class="kicker">
-          THE CAMPUS VOICE
-        </div>
-
-        <h2 class="hero-title">
-          让校园里的声音<br>
-          被看见。
-        </h2>
-
-        <p class="hero-description">
-          这里是 CAT TIMES。
-          一个属于海南中学校园的匿名交流空间。
-          你可以分享校园生活、学习压力、食堂住宿、
-          老师教学、社团活动以及任何你想讨论的事情。
-        </p>
-
-      </div>
-
-      <aside class="hero-side">
-
-        <h3 class="side-title">
-          使用说明
-        </h3>
-
-        <ol class="side-list">
-          <li>匿名发布，不要求实名。</li>
-          <li>请勿发布真实联系方式。</li>
-          <li>请勿发布身份证、手机号等隐私信息。</li>
-          <li>理性表达，避免人身攻击。</li>
-          <li>发现违规内容可以举报。</li>
-        </ol>
-
-      </aside>
-
-    </section>
+  </div>
 
 
-    <!-- =========================
-         CONTROLS
-    ========================== -->
+  <!-- =========================
+       NAV
+  ========================== -->
 
-    <section>
-
-      <div class="controls">
-
-        <div class="search">
-          <input
-            id="searchInput"
-            type="search"
-            placeholder="搜索帖子标题或内容..."
-            autocomplete="off"
-          >
-        </div>
-
-        <select
-          id="sortSelect"
-          class="sort"
-          onchange="setSort(this.value)"
-        >
-          <option value="latest">最新发布</option>
-          <option value="hot">最热门</option>
-        </select>
-
-      </div>
+  <nav
+    id="categoryNav"
+    class="nav"
+  ></nav>
 
 
-      <div
-        id="categories"
-        class="categories"
-      ></div>
+  <!-- =========================
+       CONTROLS
+  ========================== -->
 
-    </section>
+  <section class="controls">
 
-
-    <!-- =========================
-         POSTS
-    ========================== -->
-
-    <section id="postsSection">
-
-      <div class="section-heading">
-
-        <h2>
-          校园现场
-        </h2>
-
-        <span id="postCount">
-          0 POSTS
-        </span>
-
-      </div>
-
-      <div
-        id="posts"
-        class="posts"
+    <div class="search">
+      <input
+        id="searchInput"
+        type="search"
+        maxlength="100"
+        placeholder="搜索标题、内容、分类……"
+        autocomplete="off"
       >
-        <div class="loading">
-          正在加载帖子……
-        </div>
+    </div>
+
+    <select id="sortSelect">
+      <option value="latest">最新发布</option>
+      <option value="hot">最多点赞</option>
+    </select>
+
+    <button
+      id="postButton"
+      class="btn"
+      type="button"
+    >
+      ＋ 我要投稿
+    </button>
+
+  </section>
+
+
+  <!-- =========================
+       HERO
+  ========================== -->
+
+  <section class="hero">
+
+    <div class="hero-main">
+
+      <div class="hero-label">
+        CAMPUS WALL
       </div>
 
-    </section>
+      <h2>
+        这里，什么都可以说。
+      </h2>
+
+      <p>
+        匿名分享校园生活、学习压力、食堂住宿、
+        老师教学、社团活动以及那些你想说却不知道
+        对谁说的话。
+      </p>
+
+    </div>
+
+    <div class="hero-side">
+
+      <h3>今日校园版</h3>
+
+      <div class="stats">
+
+        <div class="stat">
+          <strong id="postCount">0</strong>
+          <span>公开帖子</span>
+        </div>
+
+        <div class="stat">
+          <strong id="commentCount">0</strong>
+          <span>评论</span>
+        </div>
+
+        <div class="stat">
+          <strong id="likeCount">0</strong>
+          <span>收到点赞</span>
+        </div>
+
+        <div class="stat">
+          <strong>∞</strong>
+          <span>匿名表达</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       POSTS
+  ========================== -->
+
+  <div class="section-title">
+
+    <h2>校园来稿</h2>
+
+    <span id="resultInfo">
+      正在加载……
+    </span>
+
+  </div>
+
+  <main
+    id="posts"
+    class="posts"
+  >
+
+    <div class="loading">
+      正在加载校园来稿……
+    </div>
 
   </main>
 
@@ -938,182 +949,240 @@
 
   <footer>
 
-    <div class="container">
+    <div>
+      CAT TIMES · 海南中学校园匿名交流墙
+    </div>
 
-      <div class="footer-grid">
+    <div>
+      本站不鼓励发布个人隐私、联系方式、恶意造谣、
+      人身攻击或违法内容。
+    </div>
 
-        <div>
-          <div class="footer-title">
-            CAT TIMES
-          </div>
-
-          <div>
-            海南中学校园匿名交流墙。
-          </div>
-
-          <div style="margin-top:8px;">
-            一个学生可以自由表达、分享和讨论校园生活的地方。
-          </div>
-        </div>
-
-        <div>
-          <div class="footer-title">
-            COMMUNITY
-          </div>
-
-          <div>
-            匿名投稿
-          </div>
-
-          <div>
-            评论交流
-          </div>
-
-          <div>
-            举报违规内容
-          </div>
-        </div>
-
-        <div>
-          <div class="footer-title">
-            SYSTEM
-          </div>
-
-          <div>
-            HNZX
-          </div>
-
-          <div>
-            CAT TIMES
-          </div>
-
-          <div>
-            Supabase Cloud
-          </div>
-        </div>
-
-      </div>
-
-      <div
-        style="
-          border-top:1px solid #999;
-          margin-top:20px;
-          padding-top:12px;
-        "
-      >
-        CAT TIMES © 2026
-      </div>
-
+    <div>
+      投稿内容仅代表投稿者个人观点。
     </div>
 
   </footer>
 
-
-  <!-- =========================
-       FAB
-  ========================== -->
-
-  <button
-    class="fab"
-    onclick="openPostModal()"
-    aria-label="发布帖子"
-  >
-    +
-  </button>
+</div>
 
 
-  <!-- =========================
-       POST MODAL
-  ========================== -->
+<!-- =========================
+     POST MODAL
+========================== -->
 
-  <div
-    id="postModal"
-    class="modal-backdrop"
-    onclick="backdropClose(event, 'postModal')"
-  >
+<div
+  id="postModal"
+  class="modal"
+>
 
-    <div class="modal">
+  <div class="modal-card">
 
-      <div class="modal-header">
+    <div class="modal-header">
 
-        <h3>
-          发布匿名投稿
-        </h3>
+      <h2>匿名投稿</h2>
+
+      <button
+        id="closePostModal"
+        class="close"
+        type="button"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="form-note">
+
+      投稿默认匿名显示。
+      请不要填写姓名、手机号、身份证号、QQ、
+      微信号或其他可以直接识别个人身份的信息。
+
+      <br><br>
+
+      请勿发布违法内容、恶意造谣、威胁、
+      人身攻击或他人隐私。
+
+    </div>
+
+
+    <form id="postForm">
+
+      <div class="form-group">
+
+        <label for="nickname">
+          昵称（可选）
+        </label>
+
+        <input
+          id="nickname"
+          maxlength="30"
+          placeholder="匿名用户"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="title">
+          标题
+        </label>
+
+        <input
+          id="title"
+          maxlength="100"
+          required
+          placeholder="给你的投稿起一个标题……"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="category">
+          分类
+        </label>
+
+        <select
+          id="category"
+          required
+        ></select>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="content">
+          内容
+        </label>
+
+        <textarea
+          id="content"
+          maxlength="5000"
+          required
+          placeholder="写下你想说的话……"
+        ></textarea>
+
+      </div>
+
+
+      <div class="form-bottom">
+
+        <span
+          id="contentCounter"
+          class="counter"
+        >
+          0 / 5000
+        </span>
 
         <button
-          class="close"
-          onclick="closeModal('postModal')"
+          id="submitPost"
+          class="btn"
+          type="submit"
         >
-          ×
+          发布投稿
         </button>
 
       </div>
 
-      <div class="modal-body">
+    </form>
 
-        <form id="postForm">
+  </div>
 
-          <div class="form-group">
-
-            <label>
-              标题
-            </label>
-
-            <input
-              id="postTitle"
-              maxlength="100"
-              required
-              placeholder="给你的投稿起一个标题"
-            >
-
-          </div>
+</div>
 
 
-          <div class="form-group">
+<!-- =========================
+     REPORT MODAL
+========================== -->
 
-            <label>
-              分类
-            </label>
+<div
+  id="reportModal"
+  class="modal"
+>
 
-            <select
-              id="postCategory"
-              required
-            ></select>
+  <div class="modal-card">
 
-          </div>
+    <div class="modal-header">
 
+      <h2>举报内容</h2>
 
-          <div class="form-group">
+      <button
+        id="closeReportModal"
+        class="close"
+        type="button"
+      >
+        ×
+      </button>
 
-            <label>
-              内容
-            </label>
-
-            <textarea
-              id="postContent"
-              maxlength="5000"
-              required
-              placeholder="写下你想说的话……"
-            ></textarea>
-
-            <div class="form-help">
-              请勿发布手机号、身份证号、QQ/微信号等真实联系方式。
-            </div>
-
-          </div>
+    </div>
 
 
-          <div class="form-actions">
+    <form id="reportForm">
 
-            <button
-              type="button"
-              class="secondary-btn"
-              onclick="closeModal('postModal')"
-            >
-              取消
-            </button>
+      <div class="form-group">
 
-            <button
-              type="submit"
-              class="primary-btn"
-    
+        <label for="reportReason">
+          举报原因
+        </label>
+
+        <select id="reportReason">
+
+          <option value="个人隐私">
+            涉及个人隐私
+          </option>
+
+          <option value="人身攻击">
+            人身攻击 / 骚扰
+          </option>
+
+          <option value="虚假信息">
+            明显虚假信息
+          </option>
+
+          <option value="违法内容">
+            违法或危险内容
+          </option>
+
+          <option value="其他">
+            其他
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <button
+        class="btn red"
+        type="submit"
+      >
+        提交举报
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     TOAST
+========================== -->
+
+<div
+  id="toast"
+  class="toast"
+></div>
+
+
+<script>
+/* =========================================================
+   CAT TIMES
+   Supabase + GitHub Pages
+========================

@@ -1,404 +1,1048 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>海南中学吐槽墙</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CAT TIMES｜海南中学校园报</title>
+  <meta name="description" content="海南中学校园匿名吐槽与交流墙">
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
 
-<style>
-*{box-sizing:border-box}
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif;
-  background:#f4f6fa;
-  color:#182033;
-}
+  <style>
+    :root{
+      --paper:#f7f4eb;
+      --ink:#171512;
+      --muted:#69645b;
+      --red:#8b1e2d;
+      --line:#29251f;
+      --soft:#e7e1d4;
+      --white:#fffdf7;
+    }
 
-header{
-  background:linear-gradient(135deg,#17233d,#315efb);
-  color:white;
-  padding:55px 20px 45px;
-  text-align:center;
-}
+    *{
+      box-sizing:border-box
+    }
 
-header h1{
-  margin:0;
-  font-size:36px;
-}
+    html{
+      scroll-behavior:smooth
+    }
 
-header p{
-  margin:12px 0 0;
-  opacity:.9;
-}
+    body{
+      margin:0;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 20% 10%,rgba(0,0,0,.035) 0 1px,transparent 1.5px),
+        radial-gradient(circle at 70% 35%,rgba(0,0,0,.025) 0 1px,transparent 1.5px),
+        linear-gradient(90deg,rgba(0,0,0,.018) 50%,transparent 50%);
+      background-size:23px 19px,31px 27px,5px 5px;
+      background-color:var(--paper);
+      font-family:Georgia,"Noto Serif SC","Songti SC",serif;
+      padding-bottom:82px;
+    }
 
-.container{
-  width:min(1000px,calc(100% - 30px));
-  margin:25px auto 50px;
-}
+    body:before{
+      content:"🐱   🐈   😺   🐈‍⬛   😸   😼   🐱   🐈";
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      pointer-events:none;
+      color:#000;
+      opacity:.065;
+      font-family:system-ui,sans-serif;
+      font-size:42px;
+      line-height:2.8;
+      letter-spacing:12vw;
+      word-spacing:7vw;
+      transform:rotate(-7deg) scale(1.08);
+      overflow:hidden;
+    }
 
-.toolbar{
-  background:white;
-  padding:18px;
-  border-radius:18px;
-  box-shadow:0 6px 25px rgba(20,30,60,.08);
-  margin-bottom:20px;
-}
+    a{
+      color:inherit
+    }
 
-.search{
-  width:100%;
-  padding:13px 15px;
-  border:1px solid #dfe4ee;
-  border-radius:12px;
-  font-size:15px;
-  outline:none;
-}
+    button,
+    input,
+    textarea,
+    select{
+      font:inherit
+    }
 
-.search:focus{
-  border-color:#315efb;
-}
+    button{
+      cursor:pointer
+    }
 
-.tabs{
-  display:flex;
-  gap:8px;
-  overflow-x:auto;
-  margin-top:15px;
-  padding-bottom:4px;
-}
+    .page{
+      width:min(1120px,calc(100% - 24px));
+      margin:0 auto
+    }
 
-.tabs button,
-.sort button{
-  border:0;
-  background:#eef1f7;
-  padding:9px 14px;
-  border-radius:10px;
-  white-space:nowrap;
-  cursor:pointer;
-}
+    .masthead{
+      padding:18px 0 8px;
+      text-align:center;
+      border-bottom:3px double var(--line)
+    }
 
-.tabs button.active,
-.sort button.active{
-  background:#315efb;
-  color:white;
-}
+    .datebar{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      border-bottom:1px solid var(--line);
+      padding:5px 0;
+      font-size:12px;
+      letter-spacing:.08em
+    }
 
-.sort{
-  display:flex;
-  gap:8px;
-  margin-top:15px;
-}
+    .brand{
+      margin:7px 0 0;
+      font-family:"UnifrakturCook",serif;
+      font-size:clamp(58px,10vw,106px);
+      line-height:.9;
+      font-weight:700;
+      letter-spacing:.02em
+    }
 
-.card{
-  background:white;
-  border-radius:18px;
-  padding:22px;
-  margin-bottom:16px;
-  box-shadow:0 6px 22px rgba(20,30,60,.06);
-}
+    .sub{
+      font-size:13px;
+      letter-spacing:.32em;
+      margin:8px 0 2px
+    }
 
-.card h2{
-  margin:0 0 10px;
-  font-size:20px;
-}
+    .ticker{
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+      margin-top:10px;
+      padding:7px 0;
+      font-size:12px;
+      overflow:hidden;
+      white-space:nowrap
+    }
 
-.meta{
-  color:#7b8496;
-  font-size:13px;
-  margin-bottom:15px;
-}
+    .ticker span{
+      display:inline-block;
+      margin-right:28px
+    }
 
-.content{
-  line-height:1.75;
-  white-space:pre-wrap;
-  word-break:break-word;
-}
+    .layout{
+      display:grid;
+      grid-template-columns:1.55fr .85fr;
+      gap:18px;
+      margin-top:16px
+    }
 
-.tag{
-  display:inline-block;
-  background:#edf2ff;
-  color:#315efb;
-  padding:4px 9px;
-  border-radius:8px;
-  font-size:12px;
-  margin-right:7px;
-}
+    .headline{
+      border-bottom:3px solid var(--line);
+      padding-bottom:12px
+    }
 
-.actions{
-  display:flex;
-  gap:8px;
-  margin-top:18px;
-  flex-wrap:wrap;
-}
+    .kicker{
+      font-size:12px;
+      font-weight:bold;
+      letter-spacing:.12em;
+      color:var(--red);
+      margin-bottom:7px
+    }
 
-.actions button{
-  border:0;
-  background:#f1f3f7;
-  padding:8px 12px;
-  border-radius:9px;
-  cursor:pointer;
-}
+    .headline h2{
+      font-size:clamp(28px,4.8vw,50px);
+      line-height:1.05;
+      margin:0 0 8px;
+      font-weight:900
+    }
 
-.actions button:hover{
-  background:#e6eaf2;
-}
+    .dek{
+      font-size:14px;
+      line-height:1.7;
+      color:#3f3a33;
+      margin:0
+    }
 
-.form{
-  background:white;
-  padding:24px;
-  border-radius:18px;
-  box-shadow:0 6px 22px rgba(20,30,60,.06);
-  margin-top:25px;
-}
+    .columns{
+      column-count:2;
+      column-gap:22px;
+      margin-top:13px
+    }
 
-.form h2{
-  margin-top:0;
-}
+    .columns p{
+      font-size:13px;
+      line-height:1.85;
+      margin:0 0 12px;
+      text-align:justify
+    }
 
-input,textarea,select{
-  width:100%;
-  border:1px solid #dfe4ee;
-  border-radius:10px;
-  padding:12px;
-  margin:7px 0 13px;
-  font:inherit;
-}
+    .box{
+      border:1.5px solid var(--line);
+      background:rgba(255,253,247,.62);
+      padding:12px;
+      margin-bottom:14px
+    }
 
-textarea{
-  min-height:130px;
-  resize:vertical;
-}
+    .box h3{
+      font-size:16px;
+      margin:0 0 8px;
+      border-bottom:1px solid var(--line);
+      padding-bottom:6px
+    }
 
-.primary{
-  background:#315efb;
-  color:white;
-  border:0;
-  border-radius:10px;
-  padding:12px 20px;
-  cursor:pointer;
-  font-size:15px;
-}
+    .mini{
+      font-size:12px;
+      line-height:1.7
+    }
 
-.rules{
-  background:#fff8e8;
-  border:1px solid #ffe4a8;
-  border-radius:15px;
-  padding:18px;
-  margin-top:20px;
-  color:#6c531d;
-  line-height:1.7;
-}
+    .red{
+      color:var(--red)
+    }
 
-.empty{
-  text-align:center;
-  padding:50px 20px;
-  color:#8992a3;
-}
+    .section-title{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      border-bottom:3px double var(--line);
+      padding-bottom:7px;
+      margin:22px 0 10px
+    }
 
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.5);
-  z-index:100;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-}
+    .section-title h2{
+      font-size:24px;
+      margin:0
+    }
 
-.modal.show{
-  display:flex;
-}
+    .section-title small{
+      color:var(--muted)
+    }
 
-.modal-box{
-  background:white;
-  width:min(650px,100%);
-  max-height:85vh;
-  overflow:auto;
-  border-radius:20px;
-  padding:24px;
-}
+    .tabs{
+      display:flex;
+      gap:6px;
+      flex-wrap:wrap;
+      margin-bottom:10px
+    }
 
-.modal-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
+    .tab,
+    .sort-btn{
+      border:1px solid var(--line);
+      background:transparent;
+      padding:6px 10px;
+      font-size:12px;
+      border-radius:0;
+      color:var(--ink)
+    }
 
-.close{
-  border:0;
-  background:#f0f2f6;
-  border-radius:9px;
-  padding:8px 12px;
-  cursor:pointer;
-}
+    .tab.active,
+    .sort-btn.active{
+      background:var(--ink);
+      color:var(--paper)
+    }
 
-.comment{
-  background:#f6f7fa;
-  padding:13px;
-  border-radius:12px;
-  margin:10px 0;
-}
+    .toolbar{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:8px;
+      margin-bottom:10px
+    }
 
-.comment .name{
-  font-size:13px;
-  color:#6d7585;
-  margin-bottom:5px;
-}
+    .search{
+      width:100%;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.45);
+      padding:9px 10px;
+      outline:none
+    }
 
-footer{
-  text-align:center;
-  color:#9299a8;
-  padding:30px 15px;
-  font-size:13px;
-}
+    .sorts{
+      display:flex;
+      gap:5px
+    }
 
-@media(max-width:600px){
-  header h1{
-    font-size:29px;
-  }
+    .post{
+      border-top:1px solid var(--line);
+      padding:14px 0;
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:10px
+    }
 
-  .container{
-    width:calc(100% - 20px);
-  }
+    .post:first-child{
+      border-top:0
+    }
 
-  .card,.form,.toolbar{
-    border-radius:14px;
-    padding:17px;
-  }
-}
-</style>
+    .post h3{
+      font-size:20px;
+      line-height:1.25;
+      margin:0 0 5px
+    }
+
+    .meta{
+      font-size:11px;
+      color:var(--muted);
+      margin-bottom:8px
+    }
+
+    .post p{
+      font-size:13px;
+      line-height:1.75;
+      margin:0;
+      white-space:pre-wrap
+    }
+
+    .tag{
+      display:inline-block;
+      border:1px solid #777064;
+      padding:2px 6px;
+      font-size:10px;
+      margin-right:5px
+    }
+
+    .post-actions{
+      display:flex;
+      gap:5px;
+      align-items:flex-start
+    }
+
+    .action{
+      border:1px solid #777064;
+      background:transparent;
+      padding:5px 8px;
+      font-size:12px
+    }
+
+    .action.liked{
+      color:var(--red);
+      border-color:var(--red)
+    }
+
+    .empty{
+      text-align:center;
+      padding:30px 0;
+      color:var(--muted)
+    }
+
+    .compose{
+      border:2px solid var(--line);
+      padding:14px;
+      background:rgba(255,253,247,.72)
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:9px
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:4px
+    }
+
+    .field.full{
+      grid-column:1/-1
+    }
+
+    .field label{
+      font-size:12px;
+      font-weight:bold
+    }
+
+    .field input,
+    .field textarea,
+    .field select{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.5);
+      padding:9px;
+      outline:none
+    }
+
+    .field textarea{
+      min-height:125px;
+      resize:vertical
+    }
+
+    .submit{
+      margin-top:10px;
+      background:var(--ink);
+      color:var(--paper);
+      border:0;
+      padding:10px 18px
+    }
+
+    .rules{
+      border-top:3px double var(--line);
+      margin-top:22px;
+      padding-top:12px;
+      font-size:12px;
+      line-height:1.8
+    }
+
+    .footer{
+      text-align:center;
+      border-top:1px solid var(--line);
+      margin-top:22px;
+      padding:15px 0;
+      color:var(--muted);
+      font-size:11px
+    }
+
+    .modal-backdrop{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.58);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:15px;
+      z-index:20
+    }
+
+    .modal-backdrop.show{
+      display:flex
+    }
+
+    .modal{
+      width:min(620px,100%);
+      max-height:90vh;
+      overflow:auto;
+      background:var(--paper);
+      border:2px solid var(--line);
+      padding:15px
+    }
+
+    .modal-head{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      border-bottom:1px solid var(--line);
+      padding-bottom:8px
+    }
+
+    .modal-head h3{
+      margin:0
+    }
+
+    .close{
+      border:0;
+      background:transparent;
+      font-size:22px
+    }
+
+    .comment{
+      border-bottom:1px solid #aaa295;
+      padding:9px 0;
+      font-size:13px;
+      line-height:1.7
+    }
+
+    .comment-form{
+      margin-top:12px
+    }
+
+    .comment-form textarea{
+      width:100%;
+      min-height:90px;
+      border:1px solid var(--line);
+      background:transparent;
+      padding:9px
+    }
+
+    .bottom-nav{
+      position:fixed;
+      z-index:15;
+      left:50%;
+      bottom:0;
+      transform:translateX(-50%);
+      width:min(680px,100%);
+      height:64px;
+      background:rgba(247,244,235,.97);
+      border:1px solid var(--line);
+      border-bottom:0;
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      box-shadow:0 -5px 20px rgba(0,0,0,.08)
+    }
+
+    .nav-btn{
+      border:0;
+      background:transparent;
+      font-size:11px;
+      color:var(--ink);
+      padding:6px 2px
+    }
+
+    .nav-btn strong{
+      display:block;
+      font-size:16px;
+      margin-bottom:2px
+    }
+
+    .nav-btn.center{
+      position:relative
+    }
+
+    .nav-btn.center strong{
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      background:var(--ink);
+      color:var(--paper);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin:-17px auto 2px;
+      border:4px solid var(--paper);
+      font-size:24px
+    }
+
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:80px;
+      transform:translateX(-50%) translateY(15px);
+      background:var(--ink);
+      color:var(--paper);
+      padding:8px 13px;
+      font-size:12px;
+      opacity:0;
+      pointer-events:none;
+      transition:.2s;
+      z-index:30
+    }
+
+    .toast.show{
+      opacity:1;
+      transform:translateX(-50%) translateY(0)
+    }
+
+    @media(max-width:760px){
+      .page{
+        width:min(100% - 16px,680px)
+      }
+
+      .layout{
+        grid-template-columns:1fr
+      }
+
+      .columns{
+        column-count:1
+      }
+
+      .datebar{
+        font-size:10px
+      }
+
+      .form-grid{
+        grid-template-columns:1fr
+      }
+
+      .field.full{
+        grid-column:auto
+      }
+
+      .toolbar{
+        grid-template-columns:1fr
+      }
+
+      .post{
+        grid-template-columns:1fr
+      }
+
+      .post-actions{
+        justify-content:flex-start
+      }
+
+      .headline h2{
+        font-size:31px
+      }
+
+      .box{
+        margin-bottom:10px
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
-  <h1>海南中学吐槽墙</h1>
-  <p>匿名分享校园生活、见闻与想说的话</p>
-</header>
+  <main id="top" class="page">
 
-<main class="container">
+    <header class="masthead">
 
-  <section class="toolbar">
+      <div class="datebar">
+        <span>海南中学校园报</span>
+        <span id="today"></span>
+        <span>匿名发行</span>
+      </div>
 
-    <input
-      id="searchInput"
-      class="search"
-      placeholder="🔍 搜索吐槽内容……"
+      <h1 class="brand">CAT TIMES</h1>
+
+      <div class="sub">
+        校园 · 生活 · 吐槽 · 见闻
+      </div>
+
+      <div class="ticker">
+        <span>本报坚持匿名交流原则</span>
+        <span>请勿发布隐私、威胁、骚扰或人身攻击内容</span>
+        <span>今日校园：又到了该吐槽的时候</span>
+      </div>
+
+    </header>
+
+
+    <section class="layout">
+
+      <div>
+
+        <article class="headline">
+
+          <div class="kicker">
+            今日头条 · 校园现场
+          </div>
+
+          <h2>
+            那些没人敢在班里说，却忍不住想说的话
+          </h2>
+
+          <p class="dek">
+            这里是一个匿名的校园交流角落。
+            可以吐槽，也可以分享；
+            可以认真讨论，也可以讲一点只有校园人才懂的梗。
+          </p>
+
+          <div class="columns">
+
+            <p>
+              校园生活从来不只有课表、考试和成绩。
+              食堂排队、宿舍熄灯、跑操、社团、老师的一句话，
+              都可能成为一天里最值得记住的小事。
+            </p>
+
+            <p>
+              如果你有想说的话，可以匿名投稿。
+              发帖前请先确认内容不会暴露他人的电话号码、
+              住址、账号等个人信息。
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <section id="posts">
+
+          <div class="section-title">
+            <h2>校园帖子</h2>
+            <small id="postCount">正在读取</small>
+          </div>
+
+          <div id="categories" class="tabs"></div>
+
+          <div class="toolbar">
+
+            <input
+              id="searchInput"
+              class="search"
+              placeholder="搜索帖子标题、内容或分类"
+            >
+
+            <div class="sorts">
+
+              <button
+                class="sort-btn active"
+                data-sort="latest"
+              >
+                最新
+              </button>
+
+              <button
+                class="sort-btn"
+                data-sort="hot"
+              >
+                热门
+              </button>
+
+            </div>
+
+          </div>
+
+          <div id="postList">
+            <div class="empty">
+              正在读取校园消息……
+            </div>
+          </div>
+
+        </section>
+
+
+        <section id="compose">
+
+          <div class="section-title">
+            <h2>匿名投稿</h2>
+            <small>说点你真正想说的</small>
+          </div>
+
+          <div class="compose">
+
+            <form id="postForm">
+
+              <div class="form-grid">
+
+                <div class="field">
+
+                  <label>
+                    昵称（可留空）
+                  </label>
+
+                  <input
+                    id="nickname"
+                    maxlength="30"
+                    placeholder="匿名用户"
+                  >
+
+                </div>
+
+
+                <div class="field">
+
+                  <label>
+                    分类
+                  </label>
+
+                  <select id="category"></select>
+
+                </div>
+
+
+                <div class="field full">
+
+                  <label>
+                    标题
+                  </label>
+
+                  <input
+                    id="title"
+                    required
+                    maxlength="100"
+                    placeholder="给这件事起个标题"
+                  >
+
+                </div>
+
+
+                <div class="field full">
+
+                  <label>
+                    正文
+                  </label>
+
+                  <textarea
+                    id="content"
+                    required
+                    maxlength="5000"
+                    placeholder="写下你想说的……"
+                  ></textarea>
+
+                </div>
+
+              </div>
+
+              <button
+                class="submit"
+                type="submit"
+              >
+                匿名发布
+              </button>
+
+            </form>
+
+          </div>
+
+        </section>
+
+      </div>
+
+
+      <aside>
+
+        <div class="box">
+
+          <h3>
+            校园快讯
+          </h3>
+
+          <div class="mini">
+            这里不追求官方口径，只记录同学们眼中的校园日常。
+          </div>
+
+        </div>
+
+
+        <div class="box">
+
+          <h3>
+            食堂谜案
+          </h3>
+
+          <div class="mini">
+            今天吃什么，永远是一道没有标准答案的题。
+          </div>
+
+        </div>
+
+
+        <div class="box">
+
+          <h3>
+            宿舍哲学
+          </h3>
+
+          <div class="mini">
+            当熄灯时间越来越近，所有人突然开始讨论人生。
+          </div>
+
+        </div>
+
+
+        <div class="box">
+
+          <h3>
+            跑操传说
+          </h3>
+
+          <div class="mini">
+            风很大，队伍很长，而终点依然遥远。
+          </div>
+
+        </div>
+
+
+        <div class="box">
+
+          <h3>
+            猫猫守则
+          </h3>
+
+          <div class="mini">
+
+            其一：可以吐槽事情，不要泄露隐私。
+            <br>
+
+            其二：可以表达不满，不要威胁他人。
+            <br>
+
+            其三：可以玩梗，不要把伤害当玩笑。
+            <br>
+
+            其四：发现违规内容，请及时举报。
+
+          </div>
+
+        </div>
+
+
+        <div class="box">
+
+          <h3>
+            关于本站
+          </h3>
+
+          <div class="mini">
+            本站为匿名校园交流页面，不代表学校官方立场。
+            内容由用户自行发布。
+          </div>
+
+        </div>
+
+      </aside>
+
+    </section>
+
+
+    <section class="rules">
+
+      <strong>
+        使用说明：
+      </strong>
+
+      请勿发布真实姓名、手机号、住址、账号密码等个人信息；
+      禁止威胁、骚扰、恶意造谣及违法内容。
+      本站目前采用匿名访客标识用于点赞与举报，不用于公开展示。
+
+    </section>
+
+
+    <footer class="footer">
+      CAT TIMES · 海南中学校园匿名交流墙
+    </footer>
+
+  </main>
+
+
+  <nav
+    class="bottom-nav"
+    aria-label="底部导航"
+  >
+
+    <button
+      class="nav-btn"
+      data-go="top"
     >
-
-    <div class="tabs" id="tabs"></div>
-
-    <div class="sort">
-      <button id="latestBtn" class="active" onclick="changeSort('latest')">
-        🕐 最新
-      </button>
-      <button id="hotBtn" onclick="changeSort('hot')">
-        🔥 最热
-      </button>
-    </div>
-
-  </section>
-
-  <section id="postList">
-    <div class="empty">正在加载吐槽……</div>
-  </section>
-
-  <section class="form">
-
-    <h2>✍️ 匿名发一条</h2>
-
-    <input id="nickname" maxlength="30" placeholder="昵称（可不填）">
-
-    <input id="title" maxlength="80" placeholder="标题">
-
-    <select id="category"></select>
-
-    <textarea
-      id="content"
-      maxlength="5000"
-      placeholder="想说什么？匿名写下来……"
-    ></textarea>
-
-    <button class="primary" onclick="submitPost()">
-      发布吐槽
+      <strong>⌂</strong>
+      首页
     </button>
 
-  </section>
 
-  <section class="rules">
-    <strong>📌 社区规则</strong><br>
-    可以吐槽学校生活、学习压力、食堂住宿、校园设施等。
-    请勿发布真实姓名、电话、住址等个人隐私；
-    请勿威胁、造谣、人身攻击或发布违法内容。
-    本网站为匿名交流平台，请对自己的发言负责。
-  </section>
-
-</main>
-
-<footer>
-  海南中学吐槽墙 · 匿名交流社区
-</footer>
-
-
-<!-- 评论弹窗 -->
-<div class="modal" id="commentModal">
-  <div class="modal-box">
-
-    <div class="modal-header">
-      <h2 id="commentTitle">评论</h2>
-      <button class="close" onclick="closeModal('commentModal')">关闭</button>
-    </div>
-
-    <div id="comments"></div>
-
-    <textarea
-      id="commentInput"
-      maxlength="1000"
-      placeholder="匿名留下评论……"
-    ></textarea>
-
-    <button class="primary" onclick="submitComment()">
-      发布评论
+    <button
+      class="nav-btn"
+      data-go="categories"
+    >
+      <strong>▤</strong>
+      板块
     </button>
+
+
+    <button
+      class="nav-btn center"
+      data-go="compose"
+    >
+      <strong>＋</strong>
+      发布
+    </button>
+
+
+    <button
+      class="nav-btn"
+      id="hotNav"
+    >
+      <strong>★</strong>
+      热门
+    </button>
+
+
+    <button
+      class="nav-btn"
+      id="myNav"
+    >
+      <strong>○</strong>
+      我的
+    </button>
+
+  </nav>
+
+
+  <div
+    id="commentModal"
+    class="modal-backdrop"
+  >
+
+    <div class="modal">
+
+      <div class="modal-head">
+
+        <h3 id="commentTitle">
+          评论
+        </h3>
+
+        <button
+          class="close"
+          data-close="commentModal"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div
+        id="commentList"
+        class="comment-list"
+      ></div>
+
+
+      <form
+        id="commentForm"
+        class="comment-form"
+      >
+
+        <textarea
+          id="commentContent"
+          required
+          maxlength="1000"
+          placeholder="写下你的评论……"
+        ></textarea>
+
+        <button
+          class="submit"
+          type="submit"
+        >
+          匿名评论
+        </button>
+
+      </form>
+
+    </div>
 
   </div>
-</div>
 
 
-<!-- 举报弹窗 -->
-<div class="modal" id="reportModal">
-  <div class="modal-box">
+  <div
+    id="reportModal"
+    class="modal-backdrop"
+  >
 
-    <div class="modal-header">
-      <h2>举报内容</h2>
-      <button class="close" onclick="closeModal('reportModal')">关闭</button>
+    <div class="modal">
+
+      <div class="modal-head">
+
+        <h3>
+          举报帖子
+        </h3>
+
+        <button
+          class="close"
+          data-close="reportModal"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <form
+        id="reportForm"
+        class="comment-form"
+      >
+
+        <textarea
+          id="reportReason"
+          required
+          maxlength="500"
+          placeholder="请说明举报原因"
+        ></textarea>
+
+        <button
+          class="submit"
+          type="submit"
+        >
+          提交举报
+        </button>
+
+      </form>
+
     </div>
 
-    <p>请选择举报原因：</p>
-
-    <select id="reportReason">
-      <option value="隐私泄露">隐私泄露</option>
-      <option value="人身攻击">人身攻击</option>
-      <option value="骚扰或威胁">骚扰或威胁</option>
-      <option value="疑似虚假信息">疑似虚假信息</option>
-      <option value="其他">其他</option>
-    </select>
-
-    <button class="primary" onclick="submitReport()">
-      提交举报
-    </button>
-
   </div>
-</div>
+
+
+  <div
+    id="toast"
+    class="toast"
+  ></div>
 
 
 <script>
-
-/* =========================
-   Supabase 配置
-========================= */
 
 const SUPABASE_URL =
   "https://txaovuikygbeegaancxt.supabase.co";
@@ -406,17 +1050,14 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
   "sb_publishable__pHD0KU1vXv1Daw5X3rOcg_5V2Ot3-y";
 
-const db = supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
+const db =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
 
 
-/* =========================
-   基础变量
-========================= */
-
-const categories = [
+const CATEGORIES = [
   "全部",
   "校园生活",
   "学习压力",
@@ -427,750 +1068,150 @@ const categories = [
   "其他"
 ];
 
+
 let posts = [];
-let reactions = [];
+
+let likes = new Set();
+
 let currentCategory = "全部";
-let sortMode = "latest";
-let currentPostId = null;
+
+let currentSort = "latest";
+
+let searchText = "";
+
+let activePostId = null;
 
 
-/* =========================
-   匿名访客 ID
-========================= */
+let visitorId =
+  localStorage.getItem("hnxz_visitor");
 
-let visitorId = localStorage.getItem("hnzx_visitor");
 
 if(!visitorId){
 
   visitorId =
-    crypto.randomUUID();
+    (
+      crypto.randomUUID
+      ? crypto.randomUUID()
+      : Date.now() +
+        "-" +
+        Math.random()
+          .toString(16)
+          .slice(2)
+    );
 
   localStorage.setItem(
-    "hnzx_visitor",
+    "hnxz_visitor",
     visitorId
   );
 
 }
 
 
-/* =========================
-   防 XSS
-========================= */
+const $ =
+  s => document.querySelector(s);
 
-function escapeHTML(value){
+const $$ =
+  s => document.querySelectorAll(s);
 
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+
+function escapeHTML(v){
+
+  return String(v ?? "")
+    .replace(
+      /[&<>"']/g,
+      c => ({
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#039;"
+      }[c])
+    );
 
 }
 
 
-/* =========================
-   初始化分类
-========================= */
+function toast(msg){
 
-function initCategories(){
+  const el = $("#toast");
 
-  const tabs =
-    document.getElementById("tabs");
+  el.textContent = msg;
 
-  const category =
-    document.getElementById("category");
+  el.classList.add("show");
 
-  tabs.innerHTML = "";
+  clearTimeout(window.__toast);
 
-  categories.forEach((cat,index)=>{
+  window.__toast =
+    setTimeout(
+      () =>
+        el.classList.remove("show"),
+      2200
+    );
 
-    const button =
-      document.createElement("button");
+}
 
-    button.textContent = cat;
 
-    if(index === 0){
-      button.classList.add("active");
+function formatDate(s){
+
+  const d = new Date(s);
+
+  return d.toLocaleString(
+    "zh-CN",
+    {
+      year:"numeric",
+      month:"2-digit",
+      day:"2-digit",
+      hour:"2-digit",
+      minute:"2-digit"
     }
-
-    button.onclick = ()=>{
-
-      currentCategory = cat;
-
-      document
-        .querySelectorAll(".tabs button")
-        .forEach(b=>b.classList.remove("active"));
-
-      button.classList.add("active");
-
-      renderPosts();
-
-    };
-
-    tabs.appendChild(button);
-
-  });
-
-
-  category.innerHTML =
-    categories
-      .filter(x=>x !== "全部")
-      .map(x=>`<option value="${escapeHTML(x)}">${escapeHTML(x)}</option>`)
-      .join("");
-
-}
-
-
-/* =========================
-   加载数据
-========================= */
-
-async function loadData(){
-
-  const postResult =
-    await db
-      .from("posts")
-      .select("*")
-      .eq("status","published")
-      .order("created_at",{ascending:false})
-      .limit(200);
-
-
-  if(postResult.error){
-
-    console.error(postResult.error);
-
-    document.getElementById("postList").innerHTML =
-      `<div class="empty">
-        加载失败，请刷新页面重试。
-      </div>`;
-
-    return;
-
-  }
-
-
-  posts = postResult.data || [];
-
-
-  const reactionResult =
-    await db
-      .from("reactions")
-      .select("post_id,visitor_id,type")
-      .eq("type","like");
-
-
-  if(!reactionResult.error){
-
-    reactions =
-      reactionResult.data || [];
-
-  }
-
-
-  renderPosts();
-
-}
-
-
-/* =========================
-   获取点赞数
-========================= */
-
-function likeCount(postId){
-
-  return reactions.filter(
-    r => r.post_id === postId
-  ).length;
-
-}
-
-
-/* =========================
-   是否已经点赞
-========================= */
-
-function alreadyLiked(postId){
-
-  return reactions.some(
-    r =>
-      r.post_id === postId &&
-      r.visitor_id === visitorId
   );
 
 }
 
 
-/* =========================
-   渲染帖子
-========================= */
-
-function renderPosts(){
-
-  const list =
-    document.getElementById("postList");
-
-  const keyword =
-    document
-      .getElementById("searchInput")
-      .value
-      .trim()
-      .toLowerCase();
-
-
-  let result =
-    [...posts];
-
-
-  if(currentCategory !== "全部"){
-
-    result =
-      result.filter(
-        p => p.category === currentCategory
-      );
-
-  }
-
-
-  if(keyword){
-
-    result =
-      result.filter(p =>
-        String(p.title || "")
-          .toLowerCase()
-          .includes(keyword)
-        ||
-        String(p.content || "")
-          .toLowerCase()
-          .includes(keyword)
-        ||
-        String(p.category || "")
-          .toLowerCase()
-          .includes(keyword)
-      );
-
-  }
-
-
-  if(sortMode === "hot"){
-
-    result.sort(
-      (a,b)=>
-        likeCount(b.id)-likeCount(a.id)
-    );
-
-  }else{
-
-    result.sort(
-      (a,b)=>
-        new Date(b.created_at) -
-        new Date(a.created_at)
-    );
-
-  }
-
-
-  if(result.length === 0){
-
-    list.innerHTML =
-      `<div class="empty">
-        暂时没有找到相关内容。
-      </div>`;
-
-    return;
-
-  }
-
-
-  list.innerHTML =
-    result.map(post=>{
-
-      const likes =
-        likeCount(post.id);
-
-      const liked =
-        alreadyLiked(post.id);
-
-      const time =
-        new Date(post.created_at)
-          .toLocaleString("zh-CN");
-
-
-      return `
-
-      <article class="card">
-
-        <h2>
-          ${escapeHTML(post.title || "无标题")}
-        </h2>
-
-        <div class="meta">
-
-          <span class="tag">
-            ${escapeHTML(post.category || "其他")}
-          </span>
-
-          匿名用户 · ${time}
-
-        </div>
-
-        <div class="content">
-          ${escapeHTML(post.content)}
-        </div>
-
-        <div class="actions">
-
-          <button
-            onclick="likePost('${post.id}')"
-          >
-            ${liked ? "❤️" : "🤍"}
-            ${likes}
-          </button>
-
-          <button
-            onclick="openComments('${post.id}')"
-          >
-            💬 评论
-          </button>
-
-          <button
-            onclick="openReport('${post.id}')"
-          >
-            🚩 举报
-          </button>
-
-        </div>
-
-      </article>
-
-      `;
-
-    }).join("");
-
-}
-
-
-/* =========================
-   搜索
-========================= */
-
-document
-  .getElementById("searchInput")
-  .addEventListener(
-    "input",
-    renderPosts
-  );
-
-
-/* =========================
-   排序
-========================= */
-
-function changeSort(mode){
-
-  sortMode = mode;
-
-  document
-    .getElementById("latestBtn")
-    .classList.toggle(
-      "active",
-      mode === "latest"
-    );
-
-  document
-    .getElementById("hotBtn")
-    .classList.toggle(
-      "active",
-      mode === "hot"
-    );
-
-  renderPosts();
-
-}
-
-
-/* =========================
-   发布帖子
-========================= */
-
-async function submitPost(){
-
-  const nickname =
-    document
-      .getElementById("nickname")
-      .value
-      .trim() || "匿名用户";
-
-  const title =
-    document
-      .getElementById("title")
-      .value
-      .trim();
-
-  const category =
-    document
-      .getElementById("category")
-      .value;
-
-  const content =
-    document
-      .getElementById("content")
-      .value
-      .trim();
-
-
-  if(!title){
-
-    alert("请输入标题。");
-    return;
-
-  }
-
-
-  if(!content){
-
-    alert("请输入内容。");
-    return;
-
-  }
-
-
-  const result =
-    await db
-      .from("posts")
-      .insert({
-
-        nickname,
-        title,
-        category,
-        content,
-        status:"published"
-
-      })
-      .select()
-      .single();
-
-
-  if(result.error){
-
-    console.error(result.error);
-
-    alert(
-      "发布失败：" +
-      result.error.message
-    );
-
-    return;
-
-  }
-
-
-  document
-    .getElementById("nickname")
-    .value = "";
-
-  document
-    .getElementById("title")
-    .value = "";
-
-  document
-    .getElementById("content")
-    .value = "";
-
-
-  alert("发布成功！");
-
-  await loadData();
-
-}
-
-
-/* =========================
-   点赞
-========================= */
-
-async function likePost(postId){
-
-  if(alreadyLiked(postId)){
-
-    alert("你已经点过赞了。");
-    return;
-
-  }
-
-
-  const result =
-    await db
-      .from("reactions")
-      .insert({
-
-        post_id:postId,
-        visitor_id:visitorId,
-        type:"like"
-
-      });
-
-
-  if(result.error){
-
-    alert(
-      "点赞失败：" +
-      result.error.message
-    );
-
-    return;
-
-  }
-
-
-  await loadData();
-
-}
-
-
-/* =========================
-   评论
-========================= */
-
-async function openComments(postId){
-
-  currentPostId = postId;
-
-  const post =
-    posts.find(p=>p.id===postId);
-
-  document
-    .getElementById("commentTitle")
-    .textContent =
-      "评论 · " +
-      (post?.title || "");
-
-
-  document
-    .getElementById("commentModal")
-    .classList.add("show");
-
-
-  await loadComments();
-
-}
-
-
-async function loadComments(){
-
-  const box =
-    document.getElementById("comments");
-
-  box.innerHTML =
-    "<p>正在加载评论……</p>";
-
-
-  const result =
-    await db
-      .from("comments")
-      .select("*")
-      .eq("post_id",currentPostId)
-      .eq("status","published")
-      .order("created_at",{ascending:true});
-
-
-  if(result.error){
-
-    box.innerHTML =
-      "<p>评论加载失败。</p>";
-
-    return;
-
-  }
-
-
-  const comments =
-    result.data || [];
-
-
-  if(comments.length === 0){
-
-    box.innerHTML =
-      "<p>还没有评论，来留下第一条吧。</p>";
-
-    return;
-
-  }
-
-
-  box.innerHTML =
-    comments.map(c=>`
-
-      <div class="comment">
-
-        <div class="name">
-          ${escapeHTML(c.nickname || "匿名用户")}
-          ·
-          ${new Date(c.created_at)
-            .toLocaleString("zh-CN")}
-        </div>
-
-        <div>
-          ${escapeHTML(c.content)}
-        </div>
-
-      </div>
-
-    `).join("");
-
-}
-
-
-async function submitComment(){
-
-  const input =
-    document.getElementById("commentInput");
-
-  const content =
-    input.value.trim();
-
-
-  if(!content){
-
-    alert("请输入评论。");
-    return;
-
-  }
-
-
-  const result =
-    await db
-      .from("comments")
-      .insert({
-
-        post_id:currentPostId,
-        nickname:"匿名用户",
-        content,
-        status:"published"
-
-      });
-
-
-  if(result.error){
-
-    alert(
-      "评论失败：" +
-      result.error.message
-    );
-
-    return;
-
-  }
-
-
-  input.value = "";
-
-  await loadComments();
-
-}
-
-
-/* =========================
-   举报
-========================= */
-
-function openReport(postId){
-
-  currentPostId = postId;
-
-  document
-    .getElementById("reportModal")
-    .classList.add("show");
-
-}
-
-
-async function submitReport(){
-
-  const reason =
-    document
-      .getElementById("reportReason")
-      .value;
-
-
-  const result =
-    await db
-      .from("reports")
-      .insert({
-
-        post_id:currentPostId,
-        reason,
-        visitor_id:visitorId
-
-      });
-
-
-  if(result.error){
-
-    alert(
-      "举报失败：" +
-      result.error.message
-    );
-
-    return;
-
-  }
-
-
-  closeModal("reportModal");
-
-  alert("举报已提交，感谢反馈。");
-
-}
-
-
-/* =========================
-   关闭弹窗
-========================= */
-
-function closeModal(id){
+function scrollToId(id){
 
   document
     .getElementById(id)
-    .classList.remove("show");
+    ?.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
 
 }
 
 
-/* =========================
-   点击背景关闭
-========================= */
-
-document
-  .querySelectorAll(".modal")
-  .forEach(modal=>{
-
-    modal.addEventListener(
-      "click",
-      e=>{
-
-        if(e.target === modal){
-
-          modal.classList.remove("show");
-
-        }
-
-      }
-    );
-
-  });
+$("#today").textContent =
+  new Date().toLocaleDateString(
+    "zh-CN",
+    {
+      year:"numeric",
+      month:"long",
+      day:"numeric"
+    }
+  );
 
 
-/* =========================
-   启动
-========================= */
+function renderCategories(){
 
-initCategories();
+  $("#categories").innerHTML =
+    CATEGORIES
+      .map(
+        c =>
+          `<button
+             class="tab ${c === currentCategory ? "active" : ""}"
+             data-category="${escapeHTML(c)}"
+           >
+             ${escapeHTML(c)}
+           </button>`
+      )
+      .join("");
 
-loadData();
 
-</script>
-
-</body>
-</html>
+  $("#category").innerHTML =
+    CATEGORIES
+      .filter(c => c !== "全部")
+      .map(
+        c =>
+          `<option>
+             ${escape
